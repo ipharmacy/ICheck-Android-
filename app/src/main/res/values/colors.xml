@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorBlue">#5663FF</color>
+    <color name="colorAccent">#8A98BA</color>
+    <color name="grey">#50DCDCDC</color>
+    <color name="greyFocused">#30DCDCDC</color>
+
+
+    #6C633FF
+
+    #FF8C48
+
+    #8A98BA
+
+    #BCBCBC
+
+    #848DFF
+
+    #5663FF
+</resources>
