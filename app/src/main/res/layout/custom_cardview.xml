@@ -24,7 +24,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/nikeair" />
+            tools:srcCompat="@drawable/nikeair"
+            android:transitionName="transition"/>
 
         <ImageView
             android:id="@+id/id_productBrand"

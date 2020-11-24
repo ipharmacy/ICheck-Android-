@@ -1,15 +1,15 @@
 package test.test.icheck;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -26,10 +26,11 @@ public class HomeFragment extends Fragment {
     private static ArrayList<product> productList;
     private static friendsAdapter adapterf;
     private static ArrayList<friends> friendsList;
-
+    private SharedPreferences sp ;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -46,8 +47,8 @@ public class HomeFragment extends Fragment {
 
 
     public void createProductListView(View v){
-        product p1 = new product(2,R.drawable.nikeair,R.drawable.nikelogo,"Nike Air Force 1","nike","Hay echaaeb nabeul","Available");
-        product p2 = new product(4,R.drawable.nikeair,R.drawable.nikelogo,"Nike Air Force 2","Addidas","Hay echaaeb nabeul","Unavailable");
+        product p1 = new product(2, R.drawable.nikeair, R.drawable.nikelogo,"Nike Air Force 1","nike","Hay echaaeb nabeul","Available");
+        product p2 = new product(4, R.drawable.nikeair, R.drawable.nikelogo,"Nike Air Force 2","Addidas","Hay echaaeb nabeul","Unavailable");
         productList = new ArrayList<product>();
         productList.add(p1);
         productList.add(p2);
@@ -89,5 +90,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapterf);
     }
+
 
 }
