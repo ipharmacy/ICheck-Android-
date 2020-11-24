@@ -1,15 +1,20 @@
 package test.test.icheck.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import test.test.icheck.R;
+import test.test.icheck.details;
 import test.test.icheck.entity.product;
 
 public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHolder> {
@@ -53,7 +58,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHo
         TextView productRate = holder.productRate;
         TextView productAddress = holder.productAddress;
         TextView productAvailable = holder.productAvailable;
-        ImageView productImage = holder.productImage;
+        final ImageView productImage = holder.productImage;
         ImageView productBrand = holder.productBrand;
         String rate = Integer.toString(dataSet.get(listPosition).getRate());
         prodcutName.setText(dataSet.get(listPosition).getName());
@@ -62,7 +67,14 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHo
         productAvailable.setText(dataSet.get(listPosition).getAvailable());
         productImage.setImageResource(dataSet.get(listPosition).getProductImage());
         productBrand.setImageResource(dataSet.get(listPosition).getBrandImage());
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), details.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),productImage, ViewCompat.getTransitionName(productImage));
+                v.getContext().startActivity(intent,options.toBundle());
+            }
+        });
     }
 
     @Override
