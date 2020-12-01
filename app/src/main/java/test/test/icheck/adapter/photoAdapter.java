@@ -30,19 +30,16 @@ public class photoAdapter extends RecyclerView.Adapter<photoAdapter.MyViewHolder
     }
 
     @Override
-    public photoAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public photoAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_photodetailscard, parent, false);
-
-
         photoAdapter.MyViewHolder myViewHolder = new photoAdapter.MyViewHolder(view);
         return myViewHolder;
     }
     @Override
     public void onBindViewHolder(final photoAdapter.MyViewHolder holder, final int listPosition) {
         ImageView productPhoto = holder.productPhoto;
-        productPhoto.setImageResource(dataSet.get(listPosition).getImage());
+        //productPhoto.setImageResource(dataSet.get(listPosition).getName());
     }
-
     @Override
     public int getItemCount() {
         return dataSet.size();

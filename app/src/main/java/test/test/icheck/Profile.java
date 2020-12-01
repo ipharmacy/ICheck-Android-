@@ -7,9 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.content.SharedPreferences;
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -17,7 +21,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class Profile extends Fragment {
 
     Button btn1 ;
-    TextView firstName,lastName,email;
+    TextView firstName,email;
+    ImageView avatar ;
+    String pathImage="https://polar-peak-71928.herokuapp.com/uploads/users/";
+    String avatarName;
     private SharedPreferences sp ;
     public static final String FILE_NAME = "test.test.icheck.shared";
 
@@ -34,13 +41,12 @@ public class Profile extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         btn1 = (Button)v.findViewById(R.id.button2);
-        firstName = (TextView)v.findViewById(R.id.textView);
-        lastName  = (TextView)v.findViewById(R.id.textView3);
-        email = (TextView)v.findViewById(R.id.textView);
+        firstName = (TextView)v.findViewById(R.id.textView2);
+        email = (TextView)v.findViewById(R.id.textView3);
+        avatar = (ImageView)v.findViewById(R.id.roundedImageView);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +56,13 @@ public class Profile extends Fragment {
                 startActivity(intent);
              }
         });
+      sp = v.getContext().getSharedPreferences(MainActivity.FILE_NAME,MODE_PRIVATE);
+        System.out.println( "email shared : "+sp.getString("email",""));
+        email.setText(sp.getString("email",""));
+      firstName.setText(sp.getString("firstName","")+" "+sp.getString("lastName",""));
+        avatarName = sp.getString("avatar","");
+        Glide.with(this.getContext()).load(pathImage+avatarName).into(avatar);
+
         return v;
     }
     public void sessionDestroy(View v){

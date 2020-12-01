@@ -10,7 +10,7 @@ public class RetrofitClient {
     public static Retrofit getInstance(){
         if(instance == null){
             instance=new Retrofit.Builder()
-                    .baseUrl("http://10.0.2.2:3000/api/user/")
+                    .baseUrl("https://polar-peak-71928.herokuapp.com/api/")
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

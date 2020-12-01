@@ -5,22 +5,36 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import test.test.icheck.RetroFit.IMyService;
+import test.test.icheck.RetroFit.RetrofitClient;
 import test.test.icheck.adapter.friendsAdapter;
+//import test.test.icheck.adapter.productAdapter;
 import test.test.icheck.adapter.productAdapter;
 import test.test.icheck.entity.friends;
 import test.test.icheck.entity.product;
+import test.test.icheck.entity.reviews;
 
 
 public class HomeFragment extends Fragment {
     private static productAdapter adapter;
+    IMyService iMyService;
+    String json_string;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private static ArrayList<product> productList;
@@ -37,28 +51,29 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-
-        createProductListView(v);
-        createFriendListView(v);
+        productList = new ArrayList<product>();
+        createProductListView(v,productList);
+        //createFriendListView(v);
 
         return v;
     }
 
 
 
-    public void createProductListView(View v){
-        product p1 = new product(2, R.drawable.nikeair, R.drawable.nikelogo,"Nike Air Force 1","nike","Hay echaaeb nabeul","Available");
-        product p2 = new product(4, R.drawable.nikeair, R.drawable.nikelogo,"Nike Air Force 2","Addidas","Hay echaaeb nabeul","Unavailable");
-        productList = new ArrayList<product>();
-        productList.add(p1);
-        productList.add(p2);
-        adapter = new productAdapter(productList);
-        recyclerView = (RecyclerView) v.findViewById(R.id.id_listProcuts);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
+    public void createProductListView(final View v,ArrayList<product> productList){
+        getProducts(productList);
+        if (productList != null){
+            adapter = new productAdapter(productList,getContext());
+            recyclerView = (RecyclerView) v.findViewById(R.id.id_listProcuts);
+            recyclerView.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL, false);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(adapter);
+        }else{
+            System.out.println("Erreur liste ");
+        }
+
     }
     public void createFriendListView(View v){
         friends f1 = new friends(R.drawable.dhialogo,"nike");
@@ -90,6 +105,30 @@ public class HomeFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapterf);
     }
+    public void getProducts(final ArrayList<product> productList){
+        Retrofit retrofitClient = RetrofitClient.getInstance();
+        iMyService = retrofitClient.create(IMyService.class);
+        Call <List<product>> call = iMyService.getProducts();
+        call.enqueue(new Callback<List<product>>() {
+            @Override
+            public void onResponse(Call<List<product>> call, Response<List<product>> response) {
+                //Gson gson = new Gson();
+                // List<product> listProduct = (List<product>) gson.fromJson(response.body(),product.class);
 
+                List<product> products = response.body();
+                List<reviews> reviews ;
+                for (int i=0;i<products.size();i++){
+                    productList.add(products.get(i));
+                }
+
+                System.out.println("succes "+productList);
+            }
+
+            @Override
+            public void onFailure(Call<List<product>> call, Throwable t) {
+                System.out.println("succes");
+            }
+        });
+    }
 
 }

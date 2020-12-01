@@ -1,6 +1,7 @@
 package test.test.icheck.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,20 +11,26 @@ import android.widget.TextView;
 
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import test.test.icheck.R;
-import test.test.icheck.details;
+//import test.test.icheck.details;
 import test.test.icheck.entity.product;
 
 public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHolder> {
     private ArrayList<product> dataSet;
-
+    private Context context;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView prodcutName,productRate,productAddress,productAvailable;
         ImageView productImage,productBrand;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -36,8 +43,9 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHo
         }
     }
 
-    public productAdapter(ArrayList<product> data) {
+    public productAdapter(ArrayList<product> data,Context context) {
         this.dataSet = data;
+        this.context = context;
     }
 
     @Override
@@ -59,20 +67,32 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHo
         TextView productAddress = holder.productAddress;
         TextView productAvailable = holder.productAvailable;
         final ImageView productImage = holder.productImage;
-        ImageView productBrand = holder.productBrand;
-        String rate = Integer.toString(dataSet.get(listPosition).getRate());
+        final ImageView productBrand = holder.productBrand;
+
+        String pathImage="https://polar-peak-71928.herokuapp.com/uploads/products/";
+        String fullPath = pathImage+dataSet.get(listPosition).getImages().get(0);
+
         prodcutName.setText(dataSet.get(listPosition).getName());
-        productRate.setText(rate);
+        productRate.setText(dataSet.get(listPosition).getRate());
         productAddress.setText(dataSet.get(listPosition).getAddress());
         productAvailable.setText(dataSet.get(listPosition).getAvailable());
-        productImage.setImageResource(dataSet.get(listPosition).getProductImage());
-        productBrand.setImageResource(dataSet.get(listPosition).getBrandImage());
+
+
+        ///  IMAGE
+
+        Glide.with(context).load(fullPath).into(productImage);
+
+      //  Picasso.with(context).load(pathImage+dataSet.get(listPosition).getImages().get(0)).into(productImage);
+
+      //  Glide.with(view.getContext()).load(pathImage+dataSet.get(listPosition).getImages().get(0)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(productBrand);
+       // productImage.setImageResource(dataSet.get(listPosition).getProductImage());
+        //productBrand.setImageResource(dataSet.get(listPosition).getBrandImage());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), details.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),productImage, ViewCompat.getTransitionName(productImage));
-                v.getContext().startActivity(intent,options.toBundle());
+              //  Intent intent = new Intent(v.getContext(), details.class);
+                //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),productImage, ViewCompat.getTransitionName(productImage));
+                //v.getContext().startActivity(intent,options.toBundle());
             }
         });
     }
