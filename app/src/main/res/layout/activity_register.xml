@@ -14,6 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_username24"
@@ -23,11 +24,12 @@
         android:hint="First Name"
         android:inputType="textPersonName"
         android:paddingStart="12dp"
-        android:textColorHint="#FFFFFF"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/id_lastName"
@@ -44,7 +46,8 @@
         android:hint="Last Name"
         android:inputType="textPersonName"
         android:paddingStart="12dp"
-        android:textColorHint="#FFFFFF"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +131,7 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/custom_login"
         android:fontFamily="@font/josefinsemibold"
-        android:text="Register"
+        android:text="NEXT"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -180,27 +183,18 @@
         app:layout_constraintTop_toBottomOf="@+id/id_register"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="0dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="125dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/layerlist" />
-
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/id_steps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Button"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Step 1 of 2 "
+        android:textSize="18dp"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/josefinsemibold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

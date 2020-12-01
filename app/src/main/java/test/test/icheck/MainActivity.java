@@ -126,18 +126,24 @@ public class MainActivity extends AppCompatActivity {
                 Customer result = response.body();
                 if (response.code()== 200 ) {
                     SharedPreferences.Editor editor = Preferences.edit();
+                    if (result != null) {
                         editor.putString("email",result.getEmail());
                         editor.putString("firstName",result.getFirstName());
                         editor.putString("lastName",result.getLastName());
                         editor.putString("phone",result.getPhone());
                         editor.putString("sexe",result.getSexe());
-                       editor.apply();
-                    //editor.clear();
+                        editor.putString("avatar",result.getAvatar());
+                        editor.apply();
+                        System.out.println( "Email back"+result.getEmail()+result.getFirstName());
+                        Toast.makeText(MainActivity.this, "Succes " + result, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, home.class);
+                        startActivity(intent);
+                    }
+
+              //      editor.clear();
 
 
-                    Toast.makeText(MainActivity.this, "Succes " + result, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, home.class);
-                    startActivity(intent);
+
                 }else if(response.code()== 201 ){
                     Toast.makeText(MainActivity.this,"Password does not match ",Toast.LENGTH_SHORT).show();
                 }else if(response.code()== 202 ){
@@ -182,5 +188,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return customer;
     }*/
+   @Override
+   public void onBackPressed() {
+       moveTaskToBack(true);
+   }
 }
 

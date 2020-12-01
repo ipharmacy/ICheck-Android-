@@ -1,41 +1,60 @@
 package test.test.icheck.entity;
 
-public class product {
-    int id,rate,productImage,brandImage;
-    String name,brandName,address,available;
+import com.google.gson.annotations.SerializedName;
 
-    public product(int rate, int productImage, int brandImage, String name, String brandName, String address, String available) {
-        this.rate = rate;
-        this.productImage = productImage;
-        this.brandImage = brandImage;
+import java.util.ArrayList;
+import java.util.Date;
+
+import test.test.icheck.entity.photoProduct;
+import test.test.icheck.entity.reviews;
+
+public class product {
+    @SerializedName("_id")
+    private String id;
+    @SerializedName("name")
+    private String name;
+    @SerializedName("description")
+    private String description;
+    @SerializedName("image")
+    private ArrayList<String> images;
+    @SerializedName("brand")
+    private String brand;
+    @SerializedName("category")
+    private String category;
+    @SerializedName("address")
+    private String address;
+    @SerializedName("available")
+    private String available;
+    @SerializedName("rate")
+    private String rate;
+    @SerializedName("__v")
+    private int __v;
+    @SerializedName("reviews")
+    private ArrayList<reviews> reviews;
+    @SerializedName("createdAt")
+    private Date createdAt;
+    @SerializedName("updatedAt")
+    private Date updatedAt;
+
+    public product(String id, String name, String description, ArrayList<String> images, String brand, String category, String address, String available, String rate, String __v, ArrayList<reviews> reviews) {
+        this.id = id;
         this.name = name;
-        this.brandName = brandName;
+        this.description = description;
+        this.images = images;
+        this.brand = brand;
+        this.category = category;
         this.address = address;
         this.available = available;
-    }
-
-    public int getRate() {
-        return rate;
-    }
-
-    public void setRate(int rate) {
         this.rate = rate;
+        this.reviews = reviews;
     }
 
-    public int getProductImage() {
-        return productImage;
+    public String getId() {
+        return id;
     }
 
-    public void setProductImage(int productImage) {
-        this.productImage = productImage;
-    }
-
-    public int getBrandImage() {
-        return brandImage;
-    }
-
-    public void setBrandImage(int brandImage) {
-        this.brandImage = brandImage;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -46,12 +65,37 @@ public class product {
         this.name = name;
     }
 
-    public String getBrandName() {
-        return brandName;
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getAddress() {
@@ -68,5 +112,40 @@ public class product {
 
     public void setAvailable(String available) {
         this.available = available;
+    }
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
+    public ArrayList<test.test.icheck.entity.reviews> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(ArrayList<test.test.icheck.entity.reviews> reviews) {
+        this.reviews = reviews;
+    }
+
+    @Override
+    public String toString() {
+        return "product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", images=" + images +
+                ", brand='" + brand + '\'' +
+                ", category='" + category + '\'' +
+                ", address='" + address + '\'' +
+                ", available='" + available + '\'' +
+                ", rate='" + rate + '\'' +
+                ", __v=" + __v +
+                ", reviews=" + reviews +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

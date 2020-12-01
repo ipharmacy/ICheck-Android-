@@ -17,14 +17,24 @@ public class Customer {
 
     @SerializedName("sexe")
     private String sexe;
+    @SerializedName("avatar")
+    private String avatar;
 
+    public String getAvatar() {
+        return avatar;
+    }
 
-    public Customer(String email, String firstName, String lastName, String phone, String sexe) {
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Customer(String email, String firstName, String lastName, String phone, String sexe, String avatar) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.sexe = sexe;
+        this.avatar = avatar;
     }
 
     public String getEmail() {
@@ -65,5 +75,17 @@ public class Customer {
 
     public void setSexe(String sexe) {
         this.sexe = sexe;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", sexe='" + sexe + '\'' +
+                ", avatar='" + avatar + '\'' +
+                '}';
     }
 }

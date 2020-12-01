@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import test.test.icheck.R;
 import test.test.icheck.entity.reviews;
 
-public class reviewAdapter extends RecyclerView.Adapter<reviewAdapter.MyViewHolder> {
+/*public class reviewAdapter extends RecyclerView.Adapter<reviewAdapter.MyViewHolder> {
     private ArrayList<reviews> dataSet;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -66,3 +66,4 @@ public class reviewAdapter extends RecyclerView.Adapter<reviewAdapter.MyViewHold
         return dataSet.size();
     }
 }
+*/

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import test.test.icheck.adapter.photoAdapter;
 import test.test.icheck.entity.photoProduct;
-import test.test.icheck.adapter.reviewAdapter;
+//import test.test.icheck.adapter.reviewAdapter;
 import test.test.icheck.entity.reviews;
 
 
@@ -22,7 +22,7 @@ public class details extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private static photoAdapter adapter;
-    private static reviewAdapter adapter2;
+   // private static reviewAdapter adapter2;
 
 
 
@@ -30,10 +30,10 @@ public class details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        createFriendListView();
-        creatReviewListView();
+     //   createFriendListView();
+       // creatReviewListView();
     }
-    public void createFriendListView(){
+   /* public void createFriendListView(){
         photoProduct f1 = new photoProduct(R.drawable.nikeair,"nike");
         photoList = new ArrayList<photoProduct>();
         photoList.add(f1);
@@ -65,5 +65,5 @@ public class details extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter2);
     }
-
+*/
 }
