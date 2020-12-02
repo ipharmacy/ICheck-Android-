@@ -2,6 +2,7 @@ package test.test.icheck;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +28,9 @@ import test.test.icheck.entity.friends;
 import test.test.icheck.entity.product;
 import test.test.icheck.entity.reviews;
 
+interface CompletionHandler {
+    public void prodectFetched(ArrayList<product> products);
+}
 
 public class HomeFragment extends Fragment {
     private static productAdapter adapter;
@@ -61,19 +62,23 @@ public class HomeFragment extends Fragment {
 
 
     public void createProductListView(final View v,ArrayList<product> productList){
-        getProducts(productList);
-        if (productList != null){
-            adapter = new productAdapter(productList,getContext());
-            recyclerView = (RecyclerView) v.findViewById(R.id.id_listProcuts);
-            recyclerView.setHasFixedSize(true);
-            layoutManager = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL, false);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapter);
-        }else{
-            System.out.println("Erreur liste ");
-        }
-
+        getProducts(productList, new CompletionHandler() {
+            @Override
+            public void prodectFetched(ArrayList<product> products) {
+                if (products.size() > 0){
+                    adapter = new productAdapter(products,getContext());
+                    recyclerView = (RecyclerView) v.findViewById(R.id.id_listProcuts);
+                    recyclerView.setHasFixedSize(true);
+                    layoutManager = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL, false);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(adapter);
+                }else{
+                    System.out.println("Erreur liste ");
+                    Log.e("Home Fragement", "Erreur liste ");
+                }
+            }
+        });
     }
     public void createFriendListView(View v){
         friends f1 = new friends(R.drawable.dhialogo,"nike");
@@ -105,7 +110,9 @@ public class HomeFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapterf);
     }
-    public void getProducts(final ArrayList<product> productList){
+
+
+    public void getProducts(final ArrayList<product> productList, final CompletionHandler handler ){
         Retrofit retrofitClient = RetrofitClient.getInstance();
         iMyService = retrofitClient.create(IMyService.class);
         Call <List<product>> call = iMyService.getProducts();
@@ -120,7 +127,7 @@ public class HomeFragment extends Fragment {
                 for (int i=0;i<products.size();i++){
                     productList.add(products.get(i));
                 }
-
+                handler.prodectFetched(productList);
                 System.out.println("succes "+productList);
             }
 

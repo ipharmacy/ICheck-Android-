@@ -18,9 +18,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import test.test.icheck.R;
 //import test.test.icheck.details;
+import test.test.icheck.details;
 import test.test.icheck.entity.product;
 
 public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHolder> {
@@ -77,22 +79,18 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHo
         productAddress.setText(dataSet.get(listPosition).getAddress());
         productAvailable.setText(dataSet.get(listPosition).getAvailable());
 
-
-        ///  IMAGE
-
         Glide.with(context).load(fullPath).into(productImage);
-
-      //  Picasso.with(context).load(pathImage+dataSet.get(listPosition).getImages().get(0)).into(productImage);
-
-      //  Glide.with(view.getContext()).load(pathImage+dataSet.get(listPosition).getImages().get(0)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(productBrand);
+        Glide.with(context).load(pathImage+dataSet.get(listPosition).getImages().get(0)).into(productBrand);
        // productImage.setImageResource(dataSet.get(listPosition).getProductImage());
         //productBrand.setImageResource(dataSet.get(listPosition).getBrandImage());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent intent = new Intent(v.getContext(), details.class);
-                //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),productImage, ViewCompat.getTransitionName(productImage));
-                //v.getContext().startActivity(intent,options.toBundle());
+              Intent intent = new Intent(v.getContext(), details.class);
+              intent.putExtra("productId",dataSet.get(listPosition).getId());
+             // intent.putExtra("product", (Serializable) dataSet.get(listPosition));
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),productImage, ViewCompat.getTransitionName(productImage));
+                v.getContext().startActivity(intent,options.toBundle());
             }
         });
     }

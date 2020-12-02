@@ -35,4 +35,7 @@ public interface IMyService {
     @GET("products/")
     Call<List<product>> getProducts();
 
+    @POST("products/id")
+    Call<product> findById(@Body HashMap<String,String> map);
+
 }

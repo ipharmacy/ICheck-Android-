@@ -63,12 +63,14 @@ public class MainActivity extends AppCompatActivity {
        /* GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
         gson = gsonBuilder.create();*/
-       Preferences = getSharedPreferences(FILE_NAME,MODE_PRIVATE);
-        login();
-        signIn();
+        Preferences = getSharedPreferences(FILE_NAME,MODE_PRIVATE);
+
         if (Preferences.contains("email")){
             Intent intent = new Intent(MainActivity.this, home.class);
             startActivity(intent);
+        } else {
+            login();
+            signIn();
         }
     }
 
@@ -140,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
 
-              //      editor.clear();
+                    //      editor.clear();
 
 
 
@@ -176,21 +178,21 @@ public class MainActivity extends AppCompatActivity {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
-   /* public Customer onResponse(String response) {
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = new JSONObject(response);
+    /* public Customer onResponse(String response) {
+         JSONObject jsonObject = null;
+         try {
+             jsonObject = new JSONObject(response);
 
-            Customer customer= gson.fromJson(jsonObject.getJSONObject("connected").toString(),Customer.class);
-            return customer;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return customer;
-    }*/
-   @Override
-   public void onBackPressed() {
-       moveTaskToBack(true);
-   }
+             Customer customer= gson.fromJson(jsonObject.getJSONObject("connected").toString(),Customer.class);
+             return customer;
+         } catch (JSONException e) {
+             e.printStackTrace();
+         }
+         return customer;
+     }*/
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }
 

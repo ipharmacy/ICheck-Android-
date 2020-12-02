@@ -1,5 +1,6 @@
 package test.test.icheck.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,16 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import test.test.icheck.R;
 import test.test.icheck.entity.photoProduct;
 
 public class photoAdapter extends RecyclerView.Adapter<photoAdapter.MyViewHolder> {
-    private ArrayList<photoProduct> dataSet;
-
+    private ArrayList<String> dataSet;
+    private Context context;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView productPhoto;
 
@@ -25,8 +28,9 @@ public class photoAdapter extends RecyclerView.Adapter<photoAdapter.MyViewHolder
         }
     }
 
-    public photoAdapter(ArrayList<photoProduct> data) {
+    public photoAdapter(ArrayList<String> data,Context context) {
         this.dataSet = data;
+        this.context = context;
     }
 
     @Override
@@ -38,6 +42,9 @@ public class photoAdapter extends RecyclerView.Adapter<photoAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(final photoAdapter.MyViewHolder holder, final int listPosition) {
         ImageView productPhoto = holder.productPhoto;
+        String pathImage="https://polar-peak-71928.herokuapp.com/uploads/products/";
+        String fullPath = pathImage+dataSet.get(listPosition);
+        Glide.with(context).load(fullPath).into(productPhoto);
         //productPhoto.setImageResource(dataSet.get(listPosition).getName());
     }
     @Override

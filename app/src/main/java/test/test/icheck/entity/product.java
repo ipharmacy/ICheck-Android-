@@ -130,6 +130,9 @@ public class product {
         this.reviews = reviews;
     }
 
+    public product() {
+    }
+
     @Override
     public String toString() {
         return "product{" +
