@@ -38,4 +38,7 @@ public interface IMyService {
     @POST("products/id")
     Call<product> findById(@Body HashMap<String,String> map);
 
+    @POST("products/addReview")
+    Call<HashMap<String,String>> addReview(@Body HashMap<String,String> map);
+
 }

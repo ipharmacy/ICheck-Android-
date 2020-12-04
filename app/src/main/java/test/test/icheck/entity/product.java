@@ -26,7 +26,7 @@ public class product {
     @SerializedName("available")
     private String available;
     @SerializedName("rate")
-    private String rate;
+    private Double rate;
     @SerializedName("__v")
     private int __v;
     @SerializedName("reviews")
@@ -36,7 +36,7 @@ public class product {
     @SerializedName("updatedAt")
     private Date updatedAt;
 
-    public product(String id, String name, String description, ArrayList<String> images, String brand, String category, String address, String available, String rate, String __v, ArrayList<reviews> reviews) {
+    public product(String id, String name, String description, ArrayList<String> images, String brand, String category, String address, String available, Double rate, String __v, ArrayList<reviews> reviews) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -114,11 +114,11 @@ public class product {
         this.available = available;
     }
 
-    public String getRate() {
+    public Double getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
     }
 

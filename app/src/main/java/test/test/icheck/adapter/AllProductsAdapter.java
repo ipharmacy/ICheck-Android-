@@ -11,63 +11,55 @@ import android.widget.TextView;
 
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+
 import test.test.icheck.R;
-//import test.test.icheck.details;
 import test.test.icheck.details;
 import test.test.icheck.entity.product;
 
-public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHolder> {
+public class AllProductsAdapter extends RecyclerView.Adapter<AllProductsAdapter.MyViewHolder> {
     private ArrayList<product> dataSet;
     private Context context;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView prodcutName,productRate,productAddress,productAvailable;
+        TextView prodcutName,productRate;
         ImageView productImage,productBrand;
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.prodcutName = (TextView) itemView.findViewById(R.id.id_productName);
-            this.productRate = (TextView) itemView.findViewById(R.id.id_productRate);
-            this.productAddress = (TextView) itemView.findViewById(R.id.id_productAddress);
-            this.productAvailable = (TextView) itemView.findViewById(R.id.id_produitAvailable);
-            this.productImage = (ImageView) itemView.findViewById(R.id.id_imageProduct);
-            this.productBrand = (ImageView) itemView.findViewById(R.id.id_productBrand);
+            this.prodcutName = (TextView) itemView.findViewById(R.id.textView8);
+            this.productRate = (TextView) itemView.findViewById(R.id.id_rateproducts);
+            this.productImage = (ImageView) itemView.findViewById(R.id.imageView6);
+            this.productBrand = (ImageView) itemView.findViewById(R.id.imageView7);
         }
     }
 
-    public productAdapter(ArrayList<product> data,Context context) {
+    public AllProductsAdapter(ArrayList<product> data,Context context) {
         this.dataSet = data;
         this.context = context;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                           int viewType) {
+    public AllProductsAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                          int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.custom_cardview, parent, false);
+                .inflate(R.layout.custom_rc_products, parent, false);
 
 
-        MyViewHolder myViewHolder = new MyViewHolder(view);
+        AllProductsAdapter.MyViewHolder myViewHolder = new AllProductsAdapter.MyViewHolder(view);
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
+    public void onBindViewHolder(final AllProductsAdapter.MyViewHolder holder, final int listPosition) {
 
         TextView prodcutName = holder.prodcutName;
         TextView productRate = holder.productRate;
-        TextView productAddress = holder.productAddress;
-        TextView productAvailable = holder.productAvailable;
         final ImageView productImage = holder.productImage;
         final ImageView productBrand = holder.productBrand;
 
@@ -75,19 +67,16 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHo
         String fullPath = pathImage+dataSet.get(listPosition).getImages().get(0);
         prodcutName.setText(dataSet.get(listPosition).getName());
         productRate.setText(Double.toString(dataSet.get(listPosition).getRate()));
-        productAddress.setText(dataSet.get(listPosition).getAddress());
-        productAvailable.setText(dataSet.get(listPosition).getAvailable());
-
         Glide.with(context).load(fullPath).into(productImage);
         Glide.with(context).load("https://polar-peak-71928.herokuapp.com/uploads/brands/"+dataSet.get(listPosition).getBrand()+".jpg").into(productBrand);
-       // productImage.setImageResource(dataSet.get(listPosition).getProductImage());
+        // productImage.setImageResource(dataSet.get(listPosition).getProductImage());
         //productBrand.setImageResource(dataSet.get(listPosition).getBrandImage());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(v.getContext(), details.class);
-              intent.putExtra("productId",dataSet.get(listPosition).getId());
-             // intent.putExtra("product", (Serializable) dataSet.get(listPosition));
+                Intent intent = new Intent(v.getContext(), details.class);
+                intent.putExtra("productId",dataSet.get(listPosition).getId());
+                // intent.putExtra("product", (Serializable) dataSet.get(listPosition));
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),productImage, ViewCompat.getTransitionName(productImage));
                 v.getContext().startActivity(intent,options.toBundle());
             }

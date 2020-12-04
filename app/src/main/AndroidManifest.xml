@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,31 +17,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".registerimage">
+        <activity android:name=".AllProducts"></activity>
+        <activity android:name=".registerimage"></activity>
 
-        </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="test.test.icheck.fileprovider"
             android:exported="false"
-            android:grantUriPermissions= "true">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
-      </provider>
-        <activity android:name=".details">
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
-        </activity>
-        <activity android:name=".home" ></activity>
-        <activity android:name=".register" >
-
-        </activity>
+        <activity android:name=".details"></activity>
+        <activity android:name=".home" />
+        <activity android:name=".register"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

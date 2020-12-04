@@ -135,8 +135,9 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("phone",result.getPhone());
                         editor.putString("sexe",result.getSexe());
                         editor.putString("avatar",result.getAvatar());
+                        editor.putString("userId",result.getId());
                         editor.apply();
-                        System.out.println( "Email back"+result.getEmail()+result.getFirstName());
+                        System.out.println( "Email back"+result.getEmail()+result.getFirstName()+" IDD MAWJOUD : "+result.getId());
                         Toast.makeText(MainActivity.this, "Succes " + result, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, home.class);
                         startActivity(intent);

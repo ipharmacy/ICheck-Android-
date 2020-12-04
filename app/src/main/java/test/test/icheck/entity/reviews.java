@@ -12,19 +12,48 @@ public class reviews {
     @SerializedName("user")
     private Customer user;
     @SerializedName("rate")
-    private String rate;
+    private Double rate;
     @SerializedName("createdAt")
     private Date createdAt;
     @SerializedName("updatedAt")
     private Date updatedAt;
 
-    public reviews(String id, String review, String user, String rate) {
+    public reviews() {
+    }
+
+    public Customer getUser() {
+        return user;
+    }
+
+    public void setUser(Customer user) {
+        this.user = user;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+
+
+    public reviews(String id, String review, String user, Double rate) {
         this.id = id;
         this.review = review;
         this.rate = rate;
     }
 
-    public reviews(String review, String user, String rate) {
+    public reviews(String review, String user, Double rate) {
         this.review = review;
         this.rate = rate;
     }
@@ -47,11 +76,11 @@ public class reviews {
     }
 
 
-    public String getRate() {
+    public Double getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
     }
 

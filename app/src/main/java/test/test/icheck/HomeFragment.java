@@ -1,15 +1,18 @@
 package test.test.icheck;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
@@ -36,6 +39,7 @@ public class HomeFragment extends Fragment {
     private static productAdapter adapter;
     IMyService iMyService;
     String json_string;
+    TextView seeAllProducts;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private static ArrayList<product> productList;
@@ -55,6 +59,15 @@ public class HomeFragment extends Fragment {
         productList = new ArrayList<product>();
         createProductListView(v,productList);
         //createFriendListView(v);
+        seeAllProducts = (TextView)v.findViewById(R.id.id_seeAllProducts);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AllProducts.class);
+                startActivity(intent);
+            }
+        });
+
 
         return v;
     }
@@ -69,6 +82,7 @@ public class HomeFragment extends Fragment {
                     adapter = new productAdapter(products,getContext());
                     recyclerView = (RecyclerView) v.findViewById(R.id.id_listProcuts);
                     recyclerView.setHasFixedSize(true);
+                  //  GridLayoutManager gridLayoutManager = new GridLayoutManager(v.getContext(),2,LinearLayoutManager.VERTICAL,false);
                     layoutManager = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL, false);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
