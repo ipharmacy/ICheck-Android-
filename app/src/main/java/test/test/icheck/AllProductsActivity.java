@@ -12,6 +12,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -98,14 +101,24 @@ public class AllProductsActivity extends AppCompatActivity {
            recyclerView.setItemAnimator(new DefaultItemAnimator());
            recyclerView.setAdapter(adapter);
 
-           adapter.onClickSubject
-                   .subscribe(it ->
-                                   createProductListView(productList)
-                           ,
-                   (Throwable onError) -> { },
-                   () -> {},
-                   on1 -> System.out.println("Observer 1 onSubscribe"
-                   ));
+           Disposable disposable = adapter.onClickSubject
+                   .subscribeWith(new DisposableObserver<String>() {
+                       @Override
+                       public void onNext(@NonNull String s) {
+                           createCategoryListView(productList);
+                       }
+
+                       @Override
+                       public void onError(@NonNull Throwable e) {
+
+                       }
+
+                       @Override
+                       public void onComplete() {
+
+                       }
+                   });
+           disposable.dispose();
 
        }
 
