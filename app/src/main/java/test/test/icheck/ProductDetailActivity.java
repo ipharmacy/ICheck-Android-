@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -52,8 +53,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     String rateText = null;
    private static ReviewAdapter adapter2;
     ImageView imageProduct,imageBrand;
-    TextView nameProduct,descriptionProduct,available,rate,seeAll,seeAllRate;
-    Button btnRate ;
+    TextView nameProduct,descriptionProduct,available,rate,seeAllRate;
+    Button btnRate;
     String pathImage="https://polar-peak-71928.herokuapp.com/uploads/products/";
     private SharedPreferences sp ;
     public static final String FILE_NAME = "test.test.icheck.shared";
@@ -86,7 +87,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                 nameProduct = (TextView) findViewById(R.id.id_productName);
                 available = (TextView) findViewById(R.id.id_produitAvailable);
                 rate = (TextView) findViewById(R.id.id_productRate);
-                seeAll= (TextView)findViewById(R.id.id_seeAllPhotos);
                 seeAllRate= (TextView)findViewById(R.id.id_seeAllRate);
                 btnRate  =(Button)findViewById(R.id.id_rateReviewBtn);
                 recyclerView = (RecyclerView)findViewById(R.id.id_listReviews);
@@ -104,7 +104,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                     descriptionProduct.setText(Product.getAddress());
                     available.setText(Product.getAvailable());
                     rate.setText(Double.toString(Product.getRate()));
-                    seeAll.setText("See all ("+Product.getImages().size()+")");
                     seeAllRate.setText("See All ("+Product.getReviews().size()+")");
                     ArrayList<String> listPhotos = new ArrayList<>();
                     for(int i=0;i<Product.getImages().size();i++){
@@ -128,6 +127,14 @@ public class ProductDetailActivity extends AppCompatActivity {
                     });
                     reviewList = Product.getReviews();
                     createReviewsListView(Product.getReviews());
+                    seeAllRate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(ProductDetailActivity.this,ProductDetailsReviews.class);
+                            intent.putExtra("productId",productId);
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
         });
@@ -135,7 +142,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void createReviewsListView(ArrayList<reviews> listReviews) {
-        adapter2 = new ReviewAdapter(listReviews,getApplicationContext());
+        adapter2 = new ReviewAdapter(listReviews,getApplicationContext(),0);
 
         layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setHasFixedSize(true);

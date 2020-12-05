@@ -20,12 +20,12 @@
             android:adjustViewBounds="true"
             android:background="#000000"
             android:backgroundTint="#000000"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
+            android:transitionName="transition"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/nikeair"
-            android:transitionName="transition"/>
+            tools:srcCompat="@drawable/nikeair" />
 
         <ImageView
             android:id="@+id/id_productBrand"

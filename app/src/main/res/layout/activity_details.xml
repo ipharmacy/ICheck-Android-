@@ -25,7 +25,7 @@
                     android:layout_width="0dp"
                     android:layout_height="204dp"
                     android:background="#000000"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:transitionName="transition"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -131,19 +131,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/id_productAddress" />
-
-                <TextView
-                    android:id="@+id/id_seeAllPhotos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/josefinsemibold"
-                    android:text="See all (45)"
-
-                    android:textColor="@color/colorAccent"
-                    app:layout_constraintBottom_toBottomOf="@+id/id_textPhotos"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/id_textPhotos" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/id_listPhotos"

@@ -17,8 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AllProductsActivity"></activity>
-        <activity android:name=".registerimage"></activity>
+        <activity android:name=".ProductDetailsReviews"></activity>
+        <activity android:name=".AllProductsActivity" />
+        <activity android:name=".registerimage" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -30,9 +31,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ProductDetailActivity"></activity>
+        <activity android:name=".ProductDetailActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".register"></activity>
+        <activity android:name=".register" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

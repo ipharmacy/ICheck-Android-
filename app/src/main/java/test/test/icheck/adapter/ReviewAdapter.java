@@ -21,6 +21,7 @@ import test.test.icheck.refreshDetails;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHolder> {
     private ArrayList<reviews> dataSet;
     private Context context;
+    private int adapterfinder;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView name,rate,message;
@@ -36,9 +37,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
         }
     }
 
-    public ReviewAdapter(ArrayList<reviews> data, Context context) {
+    public ReviewAdapter(ArrayList<reviews> data, Context context,int adapterfinder) {
         this.dataSet = data;
         this.context = context;
+        this.adapterfinder=adapterfinder;
     }
     public void insertData(ArrayList<reviews> insertList){
         refreshDetails refresh = new refreshDetails(dataSet,insertList);
@@ -88,11 +90,13 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        if (dataSet.size() < 3){
+        if (adapterfinder == 0){
+            if (dataSet.size() < 3){
+                return dataSet.size();
+            }else{
+                return 3;
+            }
+        }else
             return dataSet.size();
-        }else{
-            return 3;
         }
-
-    }
 }

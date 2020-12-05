@@ -51,11 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-       /* GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-        gson = gsonBuilder.create();*/
         Preferences = getSharedPreferences(FILE_NAME,MODE_PRIVATE);
-
         if (Preferences.contains("email")){
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
@@ -64,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             signIn();
         }
     }
-
     private void signIn() {
         signin = (Button) findViewById(R.id.id_login);
         email = (EditText)findViewById(R.id.id_email);
