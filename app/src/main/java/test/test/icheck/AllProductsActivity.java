@@ -11,10 +11,13 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,7 +49,7 @@ public class AllProductsActivity extends AppCompatActivity {
        loadAllProducts(productList);
 
     }
-    public void getProducts(final ArrayList<Product> productList, final CompletionHandler handler ){
+    public void getProducts(final List<Product> productList, final CompletionHandler handler ){
         Retrofit retrofitClient = RetrofitClient.getInstance();
         iMyService = retrofitClient.create(IMyService.class);
         Call<List<Product>> call = iMyService.getProducts();
@@ -71,10 +74,10 @@ public class AllProductsActivity extends AppCompatActivity {
             }
         });
     }
-    private void loadAllProducts(final ArrayList<Product> productList) {
+    private void loadAllProducts(final List<Product> productList) {
         getProducts(productList, new CompletionHandler() {
             @Override
-            public void prodectFetched(ArrayList<Product> products) {
+            public void prodectFetched(List<Product> products) {
                 if (products.size() > 0){
                     createCategoryListView(products);
                     createProductListView( products);
@@ -87,7 +90,7 @@ public class AllProductsActivity extends AppCompatActivity {
         });
     }
 
-    private void createCategoryListView(ArrayList<Product> products) {
+    private void createCategoryListView(List<Product> products) {
         categoryList = new ArrayList<String>();
         filtreCategory(categoryList,products);
        if(categoryList != null ){
@@ -105,7 +108,14 @@ public class AllProductsActivity extends AppCompatActivity {
                    .subscribeWith(new DisposableObserver<String>() {
                        @Override
                        public void onNext(@NonNull String s) {
-                           createCategoryListView(productList);
+                           io.reactivex.Observable.fromIterable(productList)
+                                   .observeOn(Schedulers.computation())
+                                   .filter(i -> i.getCategory().toLowerCase() == s.toLowerCase())
+                                   .toList()
+                                   .observeOn(AndroidSchedulers.mainThread())
+                                   .subscribe(model ->
+                                           loadAllProducts(model));
+
                        }
 
                        @Override
@@ -118,14 +128,14 @@ public class AllProductsActivity extends AppCompatActivity {
 
                        }
                    });
-           disposable.dispose();
+           //disposable.dispose();
 
        }
 
 
 
     }
-    public void createProductListView(ArrayList<Product> products){
+    public void createProductListView(List<Product> products){
         if (products.size() > 0){
             adapter2 = new AllProductsAdapter(products,this);
             recyclerView = (RecyclerView)findViewById(R.id.id_rvallproducts);
@@ -142,7 +152,7 @@ public class AllProductsActivity extends AppCompatActivity {
 
     }
 
-    private void filtreCategory(ArrayList<String> categoryList,ArrayList<Product> products) {
+    private void filtreCategory(List<String> categoryList,List<Product> products) {
         for(int i=0;i<products.size();i++){
 
             if (categoryList.isEmpty()){

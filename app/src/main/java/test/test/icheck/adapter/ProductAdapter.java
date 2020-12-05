@@ -16,13 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import test.test.icheck.R;
 //import test.test.icheck.details;
 import test.test.icheck.ProductDetailActivity;
 import test.test.icheck.entity.Product;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
-    private ArrayList<Product> dataSet;
+    private List<Product> dataSet;
     private Context context;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -41,7 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         }
     }
 
-    public ProductAdapter(ArrayList<Product> data, Context context) {
+    public ProductAdapter(List<Product> data, Context context) {
         this.dataSet = data;
         this.context = context;
     }

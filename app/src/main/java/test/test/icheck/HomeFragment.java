@@ -30,7 +30,7 @@ import test.test.icheck.entity.Product;
 import test.test.icheck.entity.reviews;
 
 interface CompletionHandler {
-    public void prodectFetched(ArrayList<Product> products);
+    public void prodectFetched(List<Product> products);
 }
 
 public class HomeFragment extends Fragment {
@@ -72,10 +72,10 @@ public class HomeFragment extends Fragment {
 
 
 
-    public void createProductListView(final View v,ArrayList<Product> productList){
+    public void createProductListView(final View v,List<Product> productList){
         getProducts(productList, new CompletionHandler() {
             @Override
-            public void prodectFetched(ArrayList<Product> products) {
+            public void prodectFetched(List<Product> products) {
                 if (products.size() > 0){
                     adapter = new ProductAdapter(products,getContext());
                     recyclerView = (RecyclerView) v.findViewById(R.id.id_listProcuts);
@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public void getProducts(final ArrayList<Product> productList, final CompletionHandler handler ){
+    public void getProducts(final List<Product> productList, final CompletionHandler handler ){
         Retrofit retrofitClient = RetrofitClient.getInstance();
         iMyService = retrofitClient.create(IMyService.class);
         Call <List<Product>> call = iMyService.getProducts();
