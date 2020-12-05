@@ -47,7 +47,6 @@ public class AllProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_products);
         productList = new ArrayList<Product>();
        loadAllProducts(productList);
-
     }
     public void getProducts(final List<Product> productList, final CompletionHandler handler ){
         Retrofit retrofitClient = RetrofitClient.getInstance();
@@ -89,7 +88,6 @@ public class AllProductsActivity extends AppCompatActivity {
             }
         });
     }
-
     private void createCategoryListView(List<Product> products) {
         categoryList = new ArrayList<String>();
         filtreCategory(categoryList,products);
@@ -105,39 +103,34 @@ public class AllProductsActivity extends AppCompatActivity {
            recyclerView.setAdapter(adapter);
 
            Disposable disposable = adapter.onClickSubject
-                   .subscribeWith(new DisposableObserver<String>() {
+           .subscribeWith(new DisposableObserver<String>() {
                        @Override
                        public void onNext(@NonNull String s) {
-                           io.reactivex.Observable.fromIterable(productList)
-                                   .observeOn(Schedulers.computation())
-                                   .filter(i -> i.getCategory().toLowerCase() == s.toLowerCase())
-                                   .toList()
-                                   .observeOn(AndroidSchedulers.mainThread())
-                                   .subscribe(model ->
-                                           loadAllProducts(model));
-
+                           System.out.println("Categoryy : "+s);
+                           ArrayList<Product> productArrayList = new ArrayList<Product>();
+                           for (int i =0 ; i < productList.size() ; i++  ){
+                               if (productList.get(i).getCategory().equals(s)){
+                                   productArrayList.add(productList.get(i));
+                               }
+                           }
+                           createProductListView(productArrayList);
                        }
 
                        @Override
                        public void onError(@NonNull Throwable e) {
-
                        }
 
                        @Override
                        public void onComplete() {
-
                        }
                    });
            //disposable.dispose();
-
        }
-
-
-
     }
     public void createProductListView(List<Product> products){
         if (products.size() > 0){
             adapter2 = new AllProductsAdapter(products,this);
+            adapter2.notifyDataSetChanged();
             recyclerView = (RecyclerView)findViewById(R.id.id_rvallproducts);
             recyclerView.setHasFixedSize(true);
             gridLayoutManager = new GridLayoutManager(this,2,LinearLayoutManager.VERTICAL,false);
@@ -149,9 +142,7 @@ public class AllProductsActivity extends AppCompatActivity {
             System.out.println("Erreur liste ");
             Log.e("Home Fragement", "Erreur liste ");
         }
-
     }
-
     private void filtreCategory(List<String> categoryList,List<Product> products) {
         for(int i=0;i<products.size();i++){
 

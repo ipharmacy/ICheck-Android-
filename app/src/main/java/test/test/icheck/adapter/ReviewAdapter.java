@@ -88,6 +88,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return dataSet.size();
+        if (dataSet.size() < 3){
+            return dataSet.size();
+        }else{
+            return 3;
+        }
+
     }
 }

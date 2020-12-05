@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".details">
+    tools:context=".ProductDetailActivity">
 
 
     <ScrollView
@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,27 +80,30 @@
 
                 <TextView
                     android:id="@+id/id_produitAvailable"
-                    android:layout_width="50dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/custom_textview_available"
                     android:elevation="8dp"
                     android:fontFamily="@font/josefinregular"
                     android:paddingStart="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="4dp"
                     android:paddingTop="2dp"
                     android:text="Available"
                     android:textColor="@color/colorPrimary"
                     android:textSize="7dp"
-                    app:layout_constraintStart_toEndOf="@+id/id_productName"
-                    app:layout_constraintTop_toBottomOf="@+id/id_imageProduit" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.024"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/id_imageProduit" />
 
                 <TextView
                     android:id="@+id/id_productRate"
                     android:layout_width="40dp"
                     android:layout_height="14dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/custom_textview_available"
                     android:drawableStart="@drawable/ic_star_24"
                     android:drawablePadding="5dp"
@@ -110,10 +113,10 @@
                     android:text="4.5"
                     android:textColor="@android:color/black"
                     android:textSize="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.804"
-                    app:layout_constraintStart_toEndOf="@+id/id_produitAvailable"
-                    app:layout_constraintTop_toBottomOf="@+id/id_imageProduit" />
+                    app:layout_constraintBottom_toBottomOf="@+id/id_imageProduit"
+                    app:layout_constraintEnd_toEndOf="@+id/id_imageProduit"
+                    app:layout_constraintTop_toTopOf="@+id/id_imageProduit"
+                    app:layout_constraintVertical_bias="0.084" />
 
                 <TextView
                     android:id="@+id/id_textPhotos"
@@ -170,62 +173,48 @@
                     android:id="@+id/id_listReviews"
                     android:layout_width="match_parent"
                     android:layout_height="193dp"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/id_textReviewRatings" />
 
+                <Button
+                    android:id="@+id/id_rateReviewBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custom_login"
+                    android:fontFamily="@font/josefinsemibold"
+                    android:paddingStart="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="2dp"
+                    android:paddingBottom="2dp"
+                    android:text="RATE &amp; Review "
+                    android:textColor="@android:color/white"
+                    android:textSize="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/id_textPhotos"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/id_imageProduit" />
+
+                <TextView
+                    android:id="@+id/id_seeAllRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/josefinsemibold"
+                    android:text="See all (45)"
+
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintBottom_toTopOf="@+id/id_listReviews"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/id_listPhotos" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="155dp">
-
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/custom_login"
-                    android:fontFamily="@font/josefinsemibold"
-                    android:text="Submit"
-                    android:textColor="#FFFFFF"
-                    android:textColorHighlight="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
-
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.496"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/editTextTextPersonName"
-                    android:layout_width="0dp"
-                    android:layout_height="47dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/input_search"
-                    android:drawablePadding="12dp"
-                    android:ems="10"
-                    android:fontFamily="@font/josefinsemibold"
-                    android:hint="Review Product"
-                    android:inputType="textPersonName"
-                    android:textColorHint="@color/colorAccent"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/button4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"></androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

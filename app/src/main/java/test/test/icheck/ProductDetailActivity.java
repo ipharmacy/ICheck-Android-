@@ -29,6 +29,7 @@ import test.test.icheck.RetroFit.IMyService;
 import test.test.icheck.RetroFit.RetrofitClient;
 import test.test.icheck.adapter.PhotoAdapter;
 import test.test.icheck.adapter.ReviewAdapter;
+import test.test.icheck.entity.Customer;
 import test.test.icheck.entity.photoProduct;
 //import test.test.icheck.adapter.reviewAdapter;
 import test.test.icheck.entity.Product;
@@ -47,12 +48,12 @@ public class ProductDetailActivity extends AppCompatActivity {
     private static PhotoAdapter adapter;
     private static test.test.icheck.entity.Product Product;
     String productId;
+    String review = null;
+    String rateText = null;
    private static ReviewAdapter adapter2;
     ImageView imageProduct,imageBrand;
-    TextView nameProduct,descriptionProduct,available,rate,seeAll;
-    EditText ReviewInput;
-    RatingBar rateBar;
-    Button submitRate;
+    TextView nameProduct,descriptionProduct,available,rate,seeAll,seeAllRate;
+    Button btnRate ;
     String pathImage="https://polar-peak-71928.herokuapp.com/uploads/products/";
     private SharedPreferences sp ;
     public static final String FILE_NAME = "test.test.icheck.shared";
@@ -63,7 +64,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
      //   createFriendListView();
        // creatReviewListView();
-
+        //userConnected = new Customer();
             sp = getApplicationContext().getSharedPreferences(MainActivity.FILE_NAME,MODE_PRIVATE);
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
@@ -72,8 +73,10 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             } else {
                 productId= extras.getString("productId");
+                review = extras.getString("review");
+                rateText = extras.getString("rate");
                 //Product2 = (product) getIntent().getSerializableExtra("product");
-                System.out.println( "productId : "+productId);
+                System.out.println( "productId : "+productId+" review : "+review);
                // System.out.println( "product2 : "+Product2);
                 Product = new Product();
                 imageProduct = (ImageView)findViewById(R.id.id_imageProduit);
@@ -84,20 +87,14 @@ public class ProductDetailActivity extends AppCompatActivity {
                 available = (TextView) findViewById(R.id.id_produitAvailable);
                 rate = (TextView) findViewById(R.id.id_productRate);
                 seeAll= (TextView)findViewById(R.id.id_seeAllPhotos);
-                ReviewInput = (EditText)findViewById(R.id.editTextTextPersonName) ;
-                rateBar = (RatingBar) findViewById(R.id.ratingBar);
-                submitRate = (Button)findViewById(R.id.button4);
+                seeAllRate= (TextView)findViewById(R.id.id_seeAllRate);
+                btnRate  =(Button)findViewById(R.id.id_rateReviewBtn);
                 recyclerView = (RecyclerView)findViewById(R.id.id_listReviews);
-
                 createProduct(Product);
-
-
             }
     }
-
     private void createProduct(test.test.icheck.entity.Product Product) {
         getProduct(Product,new CompletionHandlerDetails(){
-
             @Override
             public void productFetched(final test.test.icheck.entity.Product Product) {
                 if (Product != null){
@@ -108,6 +105,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     available.setText(Product.getAvailable());
                     rate.setText(Double.toString(Product.getRate()));
                     seeAll.setText("See all ("+Product.getImages().size()+")");
+                    seeAllRate.setText("See All ("+Product.getReviews().size()+")");
                     ArrayList<String> listPhotos = new ArrayList<>();
                     for(int i=0;i<Product.getImages().size();i++){
                         listPhotos.add(Product.getImages().get(i));
@@ -117,46 +115,15 @@ public class ProductDetailActivity extends AppCompatActivity {
                     }else{
                         System.out.println("Failed load image");
                     }
-                    submitRate.setOnClickListener(new View.OnClickListener() {
+                    btnRate.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            final String rate = Float.toString(rateBar.getRating());
-                            final String review = ReviewInput.getText().toString();
-                            Retrofit retrofitClient = RetrofitClient.getInstance();
-                            iMyService = retrofitClient.create(IMyService.class);
-                            HashMap<String,String> map = new HashMap<>();
-                            map.put("prodId",Product.getId());
-                            map.put("review",review);
-                            map.put("userId",sp.getString("userId",""));
-                            map.put("rate",rate);
-                            Call<HashMap<String,String>> call = iMyService.addReview(map);
-                            call.enqueue(new Callback<HashMap<String, String>>() {
-                                @Override
-                                public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
-                                   /* Customer customer = new Customer();
-                                    customer.setFirstName(sp.getString("firstName",""));
-                                    customer.setLastName(sp.getString("lastName",""));
-                                    customer.setAvatar(sp.getString("avatar",""));
-                                    reviews Rev = new reviews();
-                                    Rev.setId(response.body().get("message"));
-                                    Rev.setRate(Double.valueOf(rate));
-                                    Rev.setReview(review);
-                                    Rev.setUser(customer);
-                                    reviewList.add(Rev);
-
-                                   */
-                                   // adapter2.updateData(reviewList);
-                                  //  recyclerView.smoothScrollToPosition(adapter2.getItemCount()-1);
-                                    Toast.makeText(ProductDetailActivity.this, "Sucess  "+response.body().get("message"), Toast.LENGTH_SHORT).show();
-                                    System.out.println("reviewList : "+reviewList);
-                                }
-
-                                @Override
-                                public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
-                                    Toast.makeText(ProductDetailActivity.this, "FAIL ", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
+                            BottomSheetReview   BottomSheet = new BottomSheetReview();
+                            Bundle args = new Bundle();
+                            args.putString("prodId",Product.getId());
+                            args.putString("userId",sp.getString("userId",""));
+                            BottomSheet.setArguments(args);
+                            BottomSheet.show(getSupportFragmentManager(),"TAG");
                         }
                     });
                     reviewList = Product.getReviews();
