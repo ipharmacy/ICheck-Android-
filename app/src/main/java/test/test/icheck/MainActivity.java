@@ -12,12 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,10 +24,6 @@ import test.test.icheck.entity.Customer;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -66,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Preferences = getSharedPreferences(FILE_NAME,MODE_PRIVATE);
 
         if (Preferences.contains("email")){
-            Intent intent = new Intent(MainActivity.this, home.class);
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
         } else {
             login();
@@ -139,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
                         System.out.println( "Email back"+result.getEmail()+result.getFirstName()+" IDD MAWJOUD : "+result.getId());
                         Toast.makeText(MainActivity.this, "Succes " + result, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, home.class);
+                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                         startActivity(intent);
                     }
 

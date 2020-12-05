@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
 
     private BottomNavigationView navMenu;
