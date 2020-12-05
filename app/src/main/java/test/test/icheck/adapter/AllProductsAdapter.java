@@ -18,11 +18,11 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import test.test.icheck.R;
-import test.test.icheck.details;
-import test.test.icheck.entity.product;
+import test.test.icheck.ProductDetailActivity;
+import test.test.icheck.entity.Product;
 
 public class AllProductsAdapter extends RecyclerView.Adapter<AllProductsAdapter.MyViewHolder> {
-    private ArrayList<product> dataSet;
+    private ArrayList<Product> dataSet;
     private Context context;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -39,7 +39,7 @@ public class AllProductsAdapter extends RecyclerView.Adapter<AllProductsAdapter.
         }
     }
 
-    public AllProductsAdapter(ArrayList<product> data,Context context) {
+    public AllProductsAdapter(ArrayList<Product> data, Context context) {
         this.dataSet = data;
         this.context = context;
     }
@@ -74,7 +74,7 @@ public class AllProductsAdapter extends RecyclerView.Adapter<AllProductsAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), details.class);
+                Intent intent = new Intent(v.getContext(), ProductDetailActivity.class);
                 intent.putExtra("productId",dataSet.get(listPosition).getId());
                 // intent.putExtra("product", (Serializable) dataSet.get(listPosition));
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),productImage, ViewCompat.getTransitionName(productImage));

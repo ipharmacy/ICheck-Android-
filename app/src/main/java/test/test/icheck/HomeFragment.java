@@ -8,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -24,26 +22,26 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import test.test.icheck.RetroFit.IMyService;
 import test.test.icheck.RetroFit.RetrofitClient;
-import test.test.icheck.adapter.friendsAdapter;
+import test.test.icheck.adapter.FriendsAdapter;
 //import test.test.icheck.adapter.productAdapter;
-import test.test.icheck.adapter.productAdapter;
+import test.test.icheck.adapter.ProductAdapter;
 import test.test.icheck.entity.friends;
-import test.test.icheck.entity.product;
+import test.test.icheck.entity.Product;
 import test.test.icheck.entity.reviews;
 
 interface CompletionHandler {
-    public void prodectFetched(ArrayList<product> products);
+    public void prodectFetched(ArrayList<Product> products);
 }
 
 public class HomeFragment extends Fragment {
-    private static productAdapter adapter;
+    private static ProductAdapter adapter;
     IMyService iMyService;
     String json_string;
     TextView seeAllProducts;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private static ArrayList<product> productList;
-    private static friendsAdapter adapterf;
+    private static ArrayList<Product> productList;
+    private static FriendsAdapter adapterf;
     private static ArrayList<friends> friendsList;
     private SharedPreferences sp ;
     @Override
@@ -56,14 +54,14 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        productList = new ArrayList<product>();
+        productList = new ArrayList<Product>();
         createProductListView(v,productList);
         //createFriendListView(v);
         seeAllProducts = (TextView)v.findViewById(R.id.id_seeAllProducts);
         seeAllProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),AllProducts.class);
+                Intent intent = new Intent(getActivity(),AllProductsActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,12 +72,12 @@ public class HomeFragment extends Fragment {
 
 
 
-    public void createProductListView(final View v,ArrayList<product> productList){
+    public void createProductListView(final View v,ArrayList<Product> productList){
         getProducts(productList, new CompletionHandler() {
             @Override
-            public void prodectFetched(ArrayList<product> products) {
+            public void prodectFetched(ArrayList<Product> products) {
                 if (products.size() > 0){
-                    adapter = new productAdapter(products,getContext());
+                    adapter = new ProductAdapter(products,getContext());
                     recyclerView = (RecyclerView) v.findViewById(R.id.id_listProcuts);
                     recyclerView.setHasFixedSize(true);
                   //  GridLayoutManager gridLayoutManager = new GridLayoutManager(v.getContext(),2,LinearLayoutManager.VERTICAL,false);
@@ -116,7 +114,7 @@ public class HomeFragment extends Fragment {
         friendsList.add(f7);
         friendsList.add(f8);
 
-        adapterf = new friendsAdapter(friendsList);
+        adapterf = new FriendsAdapter(friendsList);
         recyclerView = (RecyclerView) v.findViewById(R.id.id_listFriends);
         layoutManager = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setHasFixedSize(true);
@@ -126,17 +124,17 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public void getProducts(final ArrayList<product> productList, final CompletionHandler handler ){
+    public void getProducts(final ArrayList<Product> productList, final CompletionHandler handler ){
         Retrofit retrofitClient = RetrofitClient.getInstance();
         iMyService = retrofitClient.create(IMyService.class);
-        Call <List<product>> call = iMyService.getProducts();
-        call.enqueue(new Callback<List<product>>() {
+        Call <List<Product>> call = iMyService.getProducts();
+        call.enqueue(new Callback<List<Product>>() {
             @Override
-            public void onResponse(Call<List<product>> call, Response<List<product>> response) {
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 //Gson gson = new Gson();
                 // List<product> listProduct = (List<product>) gson.fromJson(response.body(),product.class);
 
-                List<product> products = response.body();
+                List<Product> products = response.body();
                 List<reviews> reviews ;
                 for (int i=0;i<products.size();i++){
                     productList.add(products.get(i));
@@ -146,7 +144,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<product>> call, Throwable t) {
+            public void onFailure(Call<List<Product>> call, Throwable t) {
                 System.out.println("succes");
             }
         });

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +19,17 @@ import retrofit2.Retrofit;
 import test.test.icheck.RetroFit.IMyService;
 import test.test.icheck.RetroFit.RetrofitClient;
 import test.test.icheck.adapter.AllProductsAdapter;
-import test.test.icheck.adapter.categoryAdapter;
-import test.test.icheck.adapter.productAdapter;
-import test.test.icheck.entity.product;
+import test.test.icheck.adapter.CategoryAdapter;
+import test.test.icheck.entity.Product;
 import test.test.icheck.entity.reviews;
 
 interface CompletionHandlerAllProducts {
-    public void prodectFetched(ArrayList<product> products);
+    public void prodectFetched(ArrayList<Product> products);
 }
-public class AllProducts extends AppCompatActivity {
-    private static ArrayList<product> productList;
+public class AllProductsActivity extends AppCompatActivity {
+    private static ArrayList<Product> productList;
     private static ArrayList<String> categoryList;
-    private static categoryAdapter adapter;
+    private static CategoryAdapter adapter;
     private static AllProductsAdapter adapter2;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.LayoutManager gridLayoutManager;
@@ -41,21 +39,21 @@ public class AllProducts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_products);
-     productList = new ArrayList<product>();
+        productList = new ArrayList<Product>();
        loadAllProducts(productList);
 
     }
-    public void getProducts(final ArrayList<product> productList, final CompletionHandler handler ){
+    public void getProducts(final ArrayList<Product> productList, final CompletionHandler handler ){
         Retrofit retrofitClient = RetrofitClient.getInstance();
         iMyService = retrofitClient.create(IMyService.class);
-        Call<List<product>> call = iMyService.getProducts();
-        call.enqueue(new Callback<List<product>>() {
+        Call<List<Product>> call = iMyService.getProducts();
+        call.enqueue(new Callback<List<Product>>() {
             @Override
-            public void onResponse(Call<List<product>> call, Response<List<product>> response) {
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 //Gson gson = new Gson();
                 // List<product> listProduct = (List<product>) gson.fromJson(response.body(),product.class);
 
-                List<product> products = response.body();
+                List<Product> products = response.body();
                 List<reviews> reviews ;
                 for (int i=0;i<products.size();i++){
                     productList.add(products.get(i));
@@ -65,15 +63,15 @@ public class AllProducts extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<product>> call, Throwable t) {
+            public void onFailure(Call<List<Product>> call, Throwable t) {
                 System.out.println("succes");
             }
         });
     }
-    private void loadAllProducts(final ArrayList<product> productList) {
+    private void loadAllProducts(final ArrayList<Product> productList) {
         getProducts(productList, new CompletionHandler() {
             @Override
-            public void prodectFetched(ArrayList<product> products) {
+            public void prodectFetched(ArrayList<Product> products) {
                 if (products.size() > 0){
                     createCategoryListView(products);
                     createProductListView( products);
@@ -86,12 +84,12 @@ public class AllProducts extends AppCompatActivity {
         });
     }
 
-    private void createCategoryListView(ArrayList<product> products) {
+    private void createCategoryListView(ArrayList<Product> products) {
         categoryList = new ArrayList<String>();
         filtreCategory(categoryList,products);
        if(categoryList != null ){
            System.out.println("Category list : "+categoryList);
-           adapter = new categoryAdapter(categoryList);
+           adapter = new CategoryAdapter(categoryList);
            recyclerView = (RecyclerView)findViewById(R.id.id_categories_rv);
            recyclerView.setHasFixedSize(true);
            //  GridLayoutManager gridLayoutManager = new GridLayoutManager(v.getContext(),2,LinearLayoutManager.VERTICAL,false);
@@ -99,12 +97,22 @@ public class AllProducts extends AppCompatActivity {
            recyclerView.setLayoutManager(layoutManager);
            recyclerView.setItemAnimator(new DefaultItemAnimator());
            recyclerView.setAdapter(adapter);
+
+           adapter.onClickSubject
+                   .subscribe(it ->
+                                   createProductListView(productList)
+                           ,
+                   (Throwable onError) -> { },
+                   () -> {},
+                   on1 -> System.out.println("Observer 1 onSubscribe"
+                   ));
+
        }
 
 
 
     }
-    public void createProductListView(ArrayList<product> products){
+    public void createProductListView(ArrayList<Product> products){
         if (products.size() > 0){
             adapter2 = new AllProductsAdapter(products,this);
             recyclerView = (RecyclerView)findViewById(R.id.id_rvallproducts);
@@ -121,7 +129,7 @@ public class AllProducts extends AppCompatActivity {
 
     }
 
-    private void filtreCategory(ArrayList<String> categoryList,ArrayList<product> products) {
+    private void filtreCategory(ArrayList<String> categoryList,ArrayList<Product> products) {
         for(int i=0;i<products.size();i++){
 
             if (categoryList.isEmpty()){

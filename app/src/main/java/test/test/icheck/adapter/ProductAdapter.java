@@ -11,22 +11,18 @@ import android.widget.TextView;
 
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import test.test.icheck.R;
 //import test.test.icheck.details;
-import test.test.icheck.details;
-import test.test.icheck.entity.product;
+import test.test.icheck.ProductDetailActivity;
+import test.test.icheck.entity.Product;
 
-public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHolder> {
-    private ArrayList<product> dataSet;
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
+    private ArrayList<Product> dataSet;
     private Context context;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -45,7 +41,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHo
         }
     }
 
-    public productAdapter(ArrayList<product> data,Context context) {
+    public ProductAdapter(ArrayList<Product> data, Context context) {
         this.dataSet = data;
         this.context = context;
     }
@@ -85,7 +81,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.MyViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(v.getContext(), details.class);
+              Intent intent = new Intent(v.getContext(), ProductDetailActivity.class);
               intent.putExtra("productId",dataSet.get(listPosition).getId());
              // intent.putExtra("product", (Serializable) dataSet.get(listPosition));
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),productImage, ViewCompat.getTransitionName(productImage));

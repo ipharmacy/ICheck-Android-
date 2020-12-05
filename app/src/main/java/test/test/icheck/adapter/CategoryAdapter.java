@@ -3,18 +3,14 @@ package test.test.icheck.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
+import io.reactivex.subjects.PublishSubject;
 import test.test.icheck.R;
-import test.test.icheck.entity.friends;
 
-public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.MyViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
     private ArrayList<String> dataSet;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView categoryText;
@@ -25,26 +21,34 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.MyView
         }
     }
 
-    public categoryAdapter(ArrayList<String> data) {
+    public final PublishSubject<String> onClickSubject = PublishSubject.create();
+
+    public CategoryAdapter(ArrayList<String> data) {
         this.dataSet = data;
     }
 
     @Override
-    public categoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+    public CategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_rc_categories, parent, false);
 
 
-        categoryAdapter.MyViewHolder myViewHolder = new categoryAdapter.MyViewHolder(view);
+        CategoryAdapter.MyViewHolder myViewHolder = new CategoryAdapter.MyViewHolder(view);
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final categoryAdapter.MyViewHolder holder, final int listPosition) {
+    public void onBindViewHolder(final CategoryAdapter.MyViewHolder holder, final int listPosition) {
+        final String element =  dataSet.get(listPosition);
         TextView categoryText = holder.categoryText;
       //  friendImage.setImageResource(dataSet.get(listPosition).getFriendImage());
         String category =dataSet.get(listPosition);
         categoryText.setText(category);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickSubject.onNext(element);
+            }
+        });
     }
 
     @Override

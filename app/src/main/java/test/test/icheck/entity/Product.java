@@ -8,7 +8,7 @@ import java.util.Date;
 import test.test.icheck.entity.photoProduct;
 import test.test.icheck.entity.reviews;
 
-public class product {
+public class Product {
     @SerializedName("_id")
     private String id;
     @SerializedName("name")
@@ -36,7 +36,7 @@ public class product {
     @SerializedName("updatedAt")
     private Date updatedAt;
 
-    public product(String id, String name, String description, ArrayList<String> images, String brand, String category, String address, String available, Double rate, String __v, ArrayList<reviews> reviews) {
+    public Product(String id, String name, String description, ArrayList<String> images, String brand, String category, String address, String available, Double rate, String __v, ArrayList<reviews> reviews) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -130,7 +130,7 @@ public class product {
         this.reviews = reviews;
     }
 
-    public product() {
+    public Product() {
     }
 
     @Override

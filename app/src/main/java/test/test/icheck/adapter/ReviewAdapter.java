@@ -18,7 +18,7 @@ import test.test.icheck.R;
 import test.test.icheck.entity.reviews;
 import test.test.icheck.refreshDetails;
 
-public class reviewAdapter extends RecyclerView.Adapter<reviewAdapter.MyViewHolder> {
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHolder> {
     private ArrayList<reviews> dataSet;
     private Context context;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -36,7 +36,7 @@ public class reviewAdapter extends RecyclerView.Adapter<reviewAdapter.MyViewHold
         }
     }
 
-    public reviewAdapter(ArrayList<reviews> data,Context context) {
+    public ReviewAdapter(ArrayList<reviews> data, Context context) {
         this.dataSet = data;
         this.context = context;
     }
@@ -54,23 +54,27 @@ public class reviewAdapter extends RecyclerView.Adapter<reviewAdapter.MyViewHold
         diffResult.dispatchUpdatesTo(this);
     }
     @Override
-    public reviewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+    public ReviewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.custom_reviewscardview, parent, false);
 
 
-        reviewAdapter.MyViewHolder myViewHolder = new reviewAdapter.MyViewHolder(view);
+        ReviewAdapter.MyViewHolder myViewHolder = new ReviewAdapter.MyViewHolder(view);
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final reviewAdapter.MyViewHolder holder, final int listPosition) {
+    public void onBindViewHolder(final ReviewAdapter.MyViewHolder holder, final int listPosition) {
         String pathImage="https://polar-peak-71928.herokuapp.com/uploads/users/";
-        String fullPath = pathImage+dataSet.get(listPosition).getUser().getAvatar();
+
+        if (dataSet.get(listPosition).getUser() != null) {
+            String fullPath = pathImage+dataSet.get(listPosition).getUser().getAvatar();
+            ImageView image = holder.image;
+            Glide.with(context).load(fullPath).into(image);
+        }
         TextView name = holder.name;
         TextView rate = holder.rate;
         TextView message = holder.message;
-        ImageView image = holder.image;
         String rate2 = Double.toString(dataSet.get(listPosition).getRate());
         String firstName =dataSet.get(listPosition).getUser().getFirstName();
         String lastName = dataSet.get(listPosition).getUser().getLastName();
@@ -78,7 +82,6 @@ public class reviewAdapter extends RecyclerView.Adapter<reviewAdapter.MyViewHold
         name.setText(firstName+" "+lastName);
         rate.setText(rate2);
         message.setText(dataSet.get(listPosition).getReview());
-        Glide.with(context).load(fullPath).into(image);
         //image.setImageResource(dataSet.get(listPosition).getImage());
 
     }
