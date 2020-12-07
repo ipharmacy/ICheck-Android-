@@ -13,6 +13,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import test.test.icheck.entity.Customer;
+import test.test.icheck.entity.Favorite;
 import test.test.icheck.entity.Product;
 import test.test.icheck.entity.ProductDetails;
 
@@ -46,4 +47,6 @@ public interface IMyService {
     Call<HashMap<String,String>> removeFavorite(@Body HashMap<String,String> map);
     @POST("products/detail")
     Call<ProductDetails> getProductDetails(@Body HashMap<String,String> map);
+    @POST("user/getFavorite")
+    Call<Customer> getUserFavorite(@Body HashMap<String,String> map);
 }

@@ -168,7 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:layout_marginEnd="76dp"
+                    android:layout_marginEnd="85dp"
                     android:background="@android:color/white"
                     android:fontFamily="@font/josefinmeduim"
                     android:text="Logout"
@@ -207,7 +207,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="140dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/fashion"
+                            android:src="@drawable/nodata"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -250,6 +250,17 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/id_seelAllProfilImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/josefinsemibold"
+                    android:text="See all (45)"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView12"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
