@@ -103,7 +103,8 @@
                     android:id="@+id/id_productRate"
                     android:layout_width="40dp"
                     android:layout_height="14dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
                     android:background="@drawable/custom_textview_available"
                     android:drawableStart="@drawable/ic_star_24"
                     android:drawablePadding="5dp"
@@ -113,10 +114,8 @@
                     android:text="4.5"
                     android:textColor="@android:color/black"
                     android:textSize="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/id_imageProduit"
-                    app:layout_constraintEnd_toEndOf="@+id/id_imageProduit"
-                    app:layout_constraintTop_toTopOf="@+id/id_imageProduit"
-                    app:layout_constraintVertical_bias="0.084" />
+                    app:layout_constraintEnd_toStartOf="@+id/id_favorite"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/id_textPhotos"
@@ -196,6 +195,16 @@
                     app:layout_constraintBottom_toTopOf="@+id/id_listReviews"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/id_listPhotos" />
+
+                <ImageView
+                    android:id="@+id/id_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_favorite24" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,6 +2,8 @@ package test.test.icheck.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Customer {
     @SerializedName("_id")
     private String id;
@@ -19,8 +21,15 @@ public class Customer {
 
     @SerializedName("sexe")
     private String sexe;
+
+
     @SerializedName("avatar")
     private String avatar;
+
+    @SerializedName("favorites")
+    private List<Favorite> favorites;
+
+
 
     public String getAvatar() {
         return avatar;
@@ -41,6 +50,15 @@ public class Customer {
     public Customer (){
 
     }
+
+    public List<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Favorite> favorites) {
+        this.favorites = favorites;
+    }
+
     public String getId() {
         return id;
     }

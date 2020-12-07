@@ -31,13 +31,14 @@ import test.test.icheck.RetroFit.RetrofitClient;
 import test.test.icheck.adapter.PhotoAdapter;
 import test.test.icheck.adapter.ReviewAdapter;
 import test.test.icheck.entity.Customer;
+import test.test.icheck.entity.ProductDetails;
 import test.test.icheck.entity.photoProduct;
 //import test.test.icheck.adapter.reviewAdapter;
 import test.test.icheck.entity.Product;
 import test.test.icheck.entity.reviews;
 
 interface CompletionHandlerDetails {
-    public void productFetched(Product Product);
+    public void productFetched(Product Product,String isLikedd);
 }
 public class ProductDetailActivity extends AppCompatActivity {
     ArrayList<photoProduct> photoList;
@@ -51,10 +52,12 @@ public class ProductDetailActivity extends AppCompatActivity {
     String productId;
     String review = null;
     String rateText = null;
+    String liked="deleted";
    private static ReviewAdapter adapter2;
-    ImageView imageProduct,imageBrand;
+    ImageView imageProduct,imageBrand,favorite;
     TextView nameProduct,descriptionProduct,available,rate,seeAllRate;
     Button btnRate;
+    String isLiked = "" ;
     String pathImage="https://polar-peak-71928.herokuapp.com/uploads/products/";
     private SharedPreferences sp ;
     public static final String FILE_NAME = "test.test.icheck.shared";
@@ -66,6 +69,7 @@ public class ProductDetailActivity extends AppCompatActivity {
      //   createFriendListView();
        // creatReviewListView();
         //userConnected = new Customer();
+        favorite = (ImageView)findViewById(R.id.id_favorite);
             sp = getApplicationContext().getSharedPreferences(MainActivity.FILE_NAME,MODE_PRIVATE);
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
@@ -89,14 +93,17 @@ public class ProductDetailActivity extends AppCompatActivity {
                 rate = (TextView) findViewById(R.id.id_productRate);
                 seeAllRate= (TextView)findViewById(R.id.id_seeAllRate);
                 btnRate  =(Button)findViewById(R.id.id_rateReviewBtn);
+
+
                 recyclerView = (RecyclerView)findViewById(R.id.id_listReviews);
-                createProduct(Product);
+                createProduct(Product,isLiked);
+
             }
     }
-    private void createProduct(test.test.icheck.entity.Product Product) {
-        getProduct(Product,new CompletionHandlerDetails(){
+    private void createProduct(test.test.icheck.entity.Product Product,String isLiked) {
+        getProduct(Product,isLiked,new CompletionHandlerDetails(){
             @Override
-            public void productFetched(final test.test.icheck.entity.Product Product) {
+            public void productFetched(final test.test.icheck.entity.Product Product,String isLiked) {
                 if (Product != null){
                     Glide.with(getApplicationContext()).load(pathImage+Product.getImages().get(0)).into(imageProduct);
                     Glide.with(getApplicationContext()).load("https://polar-peak-71928.herokuapp.com/uploads/brands/"+Product.getBrand()+".jpg").into(imageBrand);
@@ -106,6 +113,9 @@ public class ProductDetailActivity extends AppCompatActivity {
                     rate.setText(Double.toString(Product.getRate()));
                     seeAllRate.setText("See All ("+Product.getReviews().size()+")");
                     ArrayList<String> listPhotos = new ArrayList<>();
+                    System.out.println("isLiked : +0"+isLiked);
+
+
                     for(int i=0;i<Product.getImages().size();i++){
                         listPhotos.add(Product.getImages().get(i));
                     }
@@ -135,6 +145,25 @@ public class ProductDetailActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                     });
+                    System.out.println("is liked louta : "+isLiked);
+                    if(isLiked.equals("1")){
+                        favorite.setImageResource(R.drawable.ic_favoriteliked_24);
+                        System.out.println("isLiked Here : "+isLiked);
+                    }else if (isLiked.equals("0")){
+                        favorite.setImageResource(R.drawable.ic_favorite24);
+                    }
+                    favorite.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (isLiked.equals("0")){
+                                addFavorite();
+                            }else{
+                                removeFavorite();
+                            }
+
+
+                        }
+                    });
                 }
             }
         });
@@ -152,26 +181,29 @@ public class ProductDetailActivity extends AppCompatActivity {
         adapter2.notifyDataSetChanged();
     }
 
-    public void  getProduct(final test.test.icheck.entity.Product Product, final CompletionHandlerDetails handler){
+    public void  getProduct(final test.test.icheck.entity.Product Product, String isLiked, final CompletionHandlerDetails handler){
             Retrofit retrofitClient = RetrofitClient.getInstance();
             iMyService = retrofitClient.create(IMyService.class);
        HashMap<String,String> map = new HashMap<>();
        map.put("prodId",productId);
-            Call<test.test.icheck.entity.Product> call = iMyService.findById(map);
-            call.enqueue(new Callback<test.test.icheck.entity.Product>() {
+       map.put("userId",sp.getString("userId",""));
+            Call<ProductDetails> call = iMyService.getProductDetails(map);
+            call.enqueue(new Callback<ProductDetails>() {
                 @Override
-                public void onResponse(Call<test.test.icheck.entity.Product> call, Response<test.test.icheck.entity.Product> response) {
-                    test.test.icheck.entity.Product ProductFromServer = response.body();
-                    handler.productFetched(ProductFromServer);
-                    System.out.println("Product FROM SERVER : "+ProductFromServer+"Response : "+response);
+                public void onResponse(Call<ProductDetails> call, Response<ProductDetails> response) {
+                    ProductDetails productDetailsFromServer = response.body();
+                    handler.productFetched(productDetailsFromServer.getProduct(),productDetailsFromServer.getIsLiked());
+                 //   ProductDetailActivity.this.isLiked = productDetailsFromServer.getIsLiked();
+                    System.out.println("Response From server : "+productDetailsFromServer.getProduct());
+                    System.out.println("is liked : "+ ProductDetailActivity.this.isLiked);
                 }
 
                 @Override
-                public void onFailure(Call<test.test.icheck.entity.Product> call, Throwable t) {
-                    System.out.println("Request failed");
+                public void onFailure(Call<ProductDetails> call, Throwable t) {
+                    System.out.println("SERVER FAILED");
                 }
-
             });
+
 
    }
 
@@ -183,6 +215,50 @@ public class ProductDetailActivity extends AppCompatActivity {
       recyclerView3.setLayoutManager(layoutManager);
       recyclerView3.setItemAnimator(new DefaultItemAnimator());
       recyclerView3.setAdapter(adapter);
+  }
+  public void addFavorite(){
+      Retrofit retrofitClient = RetrofitClient.getInstance();
+      iMyService = retrofitClient.create(IMyService.class);
+      HashMap<String,String> map = new HashMap<>();
+      map.put("prodId",productId);
+      map.put("userId",sp.getString("userId",""));
+      Call <HashMap<String,String>> call = iMyService.addFavorite(map);
+      call.enqueue(new Callback<HashMap<String, String>>() {
+          @Override
+          public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+              System.out.println("Reponse favoris : "+response.body());
+              Toast.makeText(getApplicationContext(),"Added succesfuly",Toast.LENGTH_SHORT).show();
+              favorite.setImageResource(R.drawable.ic_favoriteliked_24);
+              isLiked = "1";
+
+          }
+
+          @Override
+          public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+              System.out.println("Failed favoris ");
+          }
+      });
+
+  }
+  private void removeFavorite(){
+      Retrofit retrofitClient = RetrofitClient.getInstance();
+      iMyService = retrofitClient.create(IMyService.class);
+      HashMap<String,String> map = new HashMap<>();
+      map.put("prodId",productId);
+      map.put("userId",sp.getString("userId",""));
+      Call <HashMap<String,String>> call = iMyService.removeFavorite(map);
+      call.enqueue(new Callback<HashMap<String, String>>() {
+          @Override
+          public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+              favorite.setImageResource(R.drawable.ic_favorite24);
+              isLiked="0";
+          }
+
+          @Override
+          public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+
+          }
+      });
   }
 
 }

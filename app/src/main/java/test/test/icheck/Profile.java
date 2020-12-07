@@ -16,8 +16,6 @@ import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import static android.content.Context.MODE_PRIVATE;
-
-
 public class Profile extends Fragment {
 
     Button btn1 ;

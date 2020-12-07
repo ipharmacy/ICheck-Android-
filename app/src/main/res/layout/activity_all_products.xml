@@ -6,31 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".AllProducts">
 
-    <EditText
-        android:id="@+id/id_searchProductSeeAll"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:background="@drawable/input_search"
-        android:drawableStart="@drawable/ic_search_24"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:fontFamily="@font/josefinsemibold"
-        android:hint="Search Product"
-        android:inputType="textPersonName"
-        android:paddingStart="12dp"
-        android:textColorHint="@color/colorAccent"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/id_categories_rv"
         android:layout_width="358dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_searchProductSeeAll" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/id_rvallproducts"
@@ -40,5 +22,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_categories_rv" />
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

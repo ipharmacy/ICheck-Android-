@@ -85,6 +85,7 @@ public class HomeFragment extends Fragment {
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(adapter);
+                    seeAllProducts.setText("See All("+productList.size()+")");
                 }else{
                     System.out.println("Erreur liste ");
                     Log.e("Home Fragement", "Erreur liste ");
@@ -127,13 +128,10 @@ public class HomeFragment extends Fragment {
     public void getProducts(final List<Product> productList, final CompletionHandler handler ){
         Retrofit retrofitClient = RetrofitClient.getInstance();
         iMyService = retrofitClient.create(IMyService.class);
-        Call <List<Product>> call = iMyService.getProducts();
+        Call <List<Product>> call = iMyService.getProductsTrend();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                //Gson gson = new Gson();
-                // List<product> listProduct = (List<product>) gson.fromJson(response.body(),product.class);
-
                 List<Product> products = response.body();
                 List<reviews> reviews ;
                 for (int i=0;i<products.size();i++){

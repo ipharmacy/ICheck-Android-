@@ -8,6 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +47,13 @@ public class AllProductsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager gridLayoutManager;
     private static RecyclerView recyclerView;
     IMyService iMyService;
+    EditText searchProduct;
+    SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_products);
+         searchView = (SearchView) findViewById(R.id.searchView);
         productList = new ArrayList<Product>();
        loadAllProducts(productList);
     }
@@ -138,6 +147,18 @@ public class AllProductsActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(gridLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(adapter2);
+            searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    adapter2.getFilter().filter(newText);
+                    return false;
+                }
+            });
         }else{
             System.out.println("Erreur liste ");
             Log.e("Home Fragement", "Erreur liste ");
@@ -165,4 +186,24 @@ public class AllProductsActivity extends AppCompatActivity {
             }
         }
     }
-}
+   /* @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_product, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter2.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }*/
+    }
