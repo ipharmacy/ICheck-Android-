@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -39,6 +40,7 @@ public class FavorisFragment extends Fragment {
     private SharedPreferences sp ;
     ImageView favorites;
     IMyService iMyService;
+    TextView messageNoProduct;
     public FavorisFragment() {
         // Required empty public constructor
     }
@@ -57,6 +59,8 @@ public class FavorisFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_favoris, container, false);
         favorites = (ImageView)v.findViewById(R.id.id_cv_favoris);
+        messageNoProduct = (TextView)v.findViewById(R.id.id_noproducts);
+        messageNoProduct.setVisibility(View.GONE);
         sp = v.getContext().getSharedPreferences(MainActivity.FILE_NAME,MODE_PRIVATE);
         Retrofit retrofitClient = RetrofitClient.getInstance();
         iMyService = retrofitClient.create(IMyService.class);
@@ -67,12 +71,17 @@ public class FavorisFragment extends Fragment {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
                 Customer customer= response.body();
-                ArrayList<Product> products = new ArrayList<>();
-                //products.addAll()
-                for(int i=0;i<customer.getFavorites().size();i++){
-                    products.add(customer.getFavorites().get(i).getProduct());
+                if (customer.getFavorites().size()==0){
+                    messageNoProduct.setVisibility(View.VISIBLE);
+                }else{
+                    ArrayList<Product> products = new ArrayList<>();
+                    //products.addAll()
+                    for(int i=0;i<customer.getFavorites().size();i++){
+                        products.add(customer.getFavorites().get(i).getProduct());
+                    }
+                    createProductListView(products,v);
                 }
-                createProductListView(products,v);
+
             }
 
             @Override

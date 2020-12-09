@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import test.test.icheck.R;
 import test.test.icheck.entity.reviews;
@@ -24,7 +27,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
     private int adapterfinder;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name,rate,message;
+        TextView name,rate,message,reviewTime;
         ImageView image;
 
         public MyViewHolder(View itemView) {
@@ -33,6 +36,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
             this.rate = (TextView) itemView.findViewById(R.id.id_reviewRate);
             this.message = (TextView) itemView.findViewById(R.id.id_reviewMessage);
             this.image = (ImageView) itemView.findViewById(R.id.id_imageReview);
+            this.reviewTime=(TextView)itemView.findViewById(R.id.id_createdAtReview);
 
         }
     }
@@ -77,10 +81,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
         TextView name = holder.name;
         TextView rate = holder.rate;
         TextView message = holder.message;
+        TextView revTime=holder.reviewTime;
+        Date date = dataSet.get(listPosition).getCreatedAt();
+        DateFormat shortDateFormatEN = DateFormat.getDateTimeInstance(
+                DateFormat.SHORT,
+                DateFormat.SHORT, new Locale("EN","en"));
         String rate2 = Double.toString(dataSet.get(listPosition).getRate());
         String firstName =dataSet.get(listPosition).getUser().getFirstName();
         String lastName = dataSet.get(listPosition).getUser().getLastName();
-
+        revTime.setText(shortDateFormatEN.format(date));
         name.setText(firstName+" "+lastName);
         rate.setText(rate2);
         message.setText(dataSet.get(listPosition).getReview());

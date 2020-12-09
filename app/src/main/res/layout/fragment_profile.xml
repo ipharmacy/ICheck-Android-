@@ -49,7 +49,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/eya" />
+                        app:srcCompat="@drawable/eya" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -207,7 +207,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="140dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/nodata"
+                            app:srcCompat="@drawable/nodata"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
