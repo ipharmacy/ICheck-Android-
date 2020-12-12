@@ -119,7 +119,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/josefinsemibold"
-            android:text="Friends"
+            android:text="Our ChatBot"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -133,6 +133,19 @@
             android:layout_height="66dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_textFriends" />
+
+        <TextView
+            android:id="@+id/id_chatBots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/josefinsemibold"
+            android:text="Tap to start a conversation with our bot "
+            android:textColor="@color/colorBlue"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/id_textFriends" />
 

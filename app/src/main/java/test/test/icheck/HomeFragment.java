@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
     private static ProductAdapter adapter;
     IMyService iMyService;
     String json_string;
-    TextView seeAllProducts;
+    TextView seeAllProducts,chatBot;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private static ArrayList<Product> productList;
@@ -58,6 +58,14 @@ public class HomeFragment extends Fragment {
         createProductListView(v,productList);
         //createFriendListView(v);
         seeAllProducts = (TextView)v.findViewById(R.id.id_seeAllProducts);
+        chatBot = (TextView)v.findViewById(R.id.id_chatBots);
+        chatBot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ChatBotActivity.class);
+                startActivity(intent);
+            }
+        });
         seeAllProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,13 +73,8 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
         return v;
     }
-
-
-
     public void createProductListView(final View v,List<Product> productList){
         getProducts(productList, new CompletionHandler() {
             @Override

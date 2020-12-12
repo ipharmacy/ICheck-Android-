@@ -1,4 +1,4 @@
-package test.test.icheck;
+package test.test.icheck.ChatBot;
 
 import android.view.View;
 

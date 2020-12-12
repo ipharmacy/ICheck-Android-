@@ -5,7 +5,8 @@
     <color name="colorAccent">#8A98BA</color>
     <color name="grey">#50DCDCDC</color>
     <color name="greyFocused">#30DCDCDC</color>
-
+    <color name="bg_bubble_self">#62caa6</color>
+    <color name="bg_bubble_watbot">#ecf0f1</color>
 
     #6C633FF
 

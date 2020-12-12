@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">icheck</string>
     <string name="bg">bg</string>
+    <string name="menu_refresh">Refresh</string>
+
 </resources>

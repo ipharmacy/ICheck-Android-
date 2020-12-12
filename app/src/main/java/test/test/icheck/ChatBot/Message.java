@@ -1,4 +1,4 @@
-package test.test.icheck;
+package test.test.icheck.ChatBot;
 
 /**
  * Created by Vidyasagar Machupalli on 17/11/16.

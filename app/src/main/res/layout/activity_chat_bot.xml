@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.vmac.WatBot.MainActivity"
+    tools:context="test.test.icheck.ChatBotActivity"
     >
 
     <androidx.recyclerview.widget.RecyclerView
@@ -34,7 +34,7 @@
             android:elevation="0dp"
             android:paddingLeft="10dp"
             android:scaleType="fitCenter"
-            android:src="@mipmap/ic_mic" />
+            android:src="@drawable/ic_mic" />
 
         <EditText
             android:id="@+id/message"
@@ -44,18 +44,11 @@
             android:layout_marginRight="10dp"
             android:layout_weight="3"
             android:background="@null"
-            android:hint="What's in your mind"
+            android:hint="Whats on your mind"
             android:lines="1"
             android:paddingLeft="10dp" />
 
-        <!--<Button android:id="@+id/btn_send"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:text="ASK"
-            android:textSize="16dp"
-            android:textColor="@color/colorPrimary" />-->
+
         <ImageView
             android:id="@+id/btn_send"
             android:layout_width="0dp"
@@ -66,7 +59,8 @@
             android:elevation="0dp"
             android:paddingLeft="10dp"
             android:scaleType="fitCenter"
-            android:src="@mipmap/ic_send" />
+            android:src="@drawable/ic_send"
+            />
 
 
     </LinearLayout>

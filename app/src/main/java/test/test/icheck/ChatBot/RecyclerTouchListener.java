@@ -1,10 +1,11 @@
-package test.test.icheck;
+package test.test.icheck.ChatBot;
 
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by VMac on 06/01/17.
