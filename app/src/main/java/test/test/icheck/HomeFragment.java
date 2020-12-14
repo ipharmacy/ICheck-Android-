@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -37,7 +38,8 @@ public class HomeFragment extends Fragment {
     private static ProductAdapter adapter;
     IMyService iMyService;
     String json_string;
-    TextView seeAllProducts,chatBot;
+    TextView seeAllProducts,chatBot,id_textTrendingProducts;
+    ImageView id_categoryHome;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private static ArrayList<Product> productList;
@@ -58,6 +60,15 @@ public class HomeFragment extends Fragment {
         createProductListView(v,productList);
         //createFriendListView(v);
         seeAllProducts = (TextView)v.findViewById(R.id.id_seeAllProducts);
+        id_textTrendingProducts=(TextView)v.findViewById(R.id.id_textTrendingProducts);
+        id_categoryHome = (ImageView)v.findViewById(R.id.id_categoryHome);
+        id_textTrendingProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ArDecorationActivity.class);
+                startActivity(intent);
+            }
+        });
         chatBot = (TextView)v.findViewById(R.id.id_chatBots);
         chatBot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +81,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),AllProductsActivity.class);
+                startActivity(intent);
+            }
+        });
+        id_categoryHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ArCustomFaceFiltreActivity.class);
                 startActivity(intent);
             }
         });

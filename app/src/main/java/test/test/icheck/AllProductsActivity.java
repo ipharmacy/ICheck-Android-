@@ -157,44 +157,14 @@ public class AllProductsActivity extends AppCompatActivity {
     }
     private void filtreCategory(List<String> categoryList,List<Product> products) {
         for(int i=0;i<products.size();i++){
-
             if (categoryList.isEmpty()){
-
                 categoryList.add(products.get(i).getCategory());
-
             }else{
-
-                for (int j=0 ; j<categoryList.size();j++) {
-
-                    if (!products.get(i).getCategory().equals(categoryList.get(j))) {
-
-                        categoryList.add(products.get(i).getCategory());
-
-                    }
-
+                if(!(categoryList.contains(products.get(i).getCategory()))){
+                    categoryList.add(products.get(i).getCategory());
                 }
-
             }
         }
     }
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_product, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) findViewById(R.id.searchView);
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter2.getFilter().filter(newText);
-                return false;
-            }
-        });
-        return true;
-    }*/
-    }
+
+}
