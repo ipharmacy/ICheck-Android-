@@ -18,11 +18,14 @@ public class ArDecorationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ar_decoration);
+        Bundle extras = getIntent().getExtras();
+        String name = extras.getString("name")+".sfb";
+        System.out.println("NAME IN AR : "+name);
         arFragment= (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ArFragment);
         arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
             Anchor  anchor = hitResult.createAnchor();
             ModelRenderable.builder()
-                    .setSource(this, Uri.parse("tree.sfb"))
+                    .setSource(this, Uri.parse(name))
                     .build()
                     .thenAccept(modelRenderable -> addModelToScene(anchor,modelRenderable))
                     .exceptionally(throwable -> {

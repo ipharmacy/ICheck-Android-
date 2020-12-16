@@ -23,10 +23,20 @@ public class ArCustomFaceFiltreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ar_custom_face_filtre);
+        Bundle extras = getIntent().getExtras();
+        String name = extras.getString("name")+".sfb";
+        if (name.equals("null.sfb")){
+            name ="Sunglasses.sfb";
+        }
+        String nameFiltre = extras.getString("nameFiltre")+".png";
+        if (nameFiltre.equals("null.png")){
+            nameFiltre="blankpagear.png";
+        }
         ArCustomFaceFiltre arCustomFaceFiltre = (ArCustomFaceFiltre) getSupportFragmentManager().findFragmentById(R.id.IdArFaceFiltre);
         ModelRenderable.builder()
+
                // .setSource(this,R.raw.)
-                .setSource(this,Uri.parse("black_sunglasses.sfb"))
+                .setSource(this,Uri.parse(name))
                 .build()
                 .thenAccept(renderable -> {
                     modelRenderable = renderable;
@@ -35,7 +45,7 @@ public class ArCustomFaceFiltreActivity extends AppCompatActivity {
 
                 });
         Texture.builder()
-                .setSource(this,R.drawable.makeup)
+                .setSource(this,Uri.parse(nameFiltre))
                 .build()
                 .thenAccept(texture ->this.texture = texture);
         arCustomFaceFiltre.getArSceneView().setCameraStreamRenderPriority(Renderable.RENDER_PRIORITY_FIRST);

@@ -62,13 +62,6 @@ public class HomeFragment extends Fragment {
         seeAllProducts = (TextView)v.findViewById(R.id.id_seeAllProducts);
         id_textTrendingProducts=(TextView)v.findViewById(R.id.id_textTrendingProducts);
         id_categoryHome = (ImageView)v.findViewById(R.id.id_categoryHome);
-        id_textTrendingProducts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ArDecorationActivity.class);
-                startActivity(intent);
-            }
-        });
         chatBot = (TextView)v.findViewById(R.id.id_chatBots);
         chatBot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,13 +74,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),AllProductsActivity.class);
-                startActivity(intent);
-            }
-        });
-        id_categoryHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ArCustomFaceFiltreActivity.class);
                 startActivity(intent);
             }
         });
@@ -154,7 +140,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 List<Product> products = response.body();
-                List<reviews> reviews ;
+                List<reviews> reviews;
                 for (int i=0;i<products.size();i++){
                     productList.add(products.get(i));
                 }

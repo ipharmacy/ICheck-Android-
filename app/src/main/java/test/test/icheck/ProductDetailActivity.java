@@ -56,7 +56,7 @@ public class ProductDetailActivity extends AppCompatActivity {
    private static ReviewAdapter adapter2;
     ImageView imageProduct,imageBrand,favorite;
     TextView nameProduct,descriptionProduct,available,rate,seeAllRate;
-    Button btnRate;
+    Button btnRate,btnArView;
     String isLiked = "" ;
     String pathImage="https://polar-peak-71928.herokuapp.com/uploads/products/";
     private SharedPreferences sp ;
@@ -93,8 +93,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                 rate = (TextView) findViewById(R.id.id_productRate);
                 seeAllRate= (TextView)findViewById(R.id.id_seeAllRate);
                 btnRate  =(Button)findViewById(R.id.id_rateReviewBtn);
-
-
+                btnArView = (Button)findViewById(R.id.id_viewAr);
+                btnArView.setVisibility(View.GONE);
                 recyclerView = (RecyclerView)findViewById(R.id.id_listReviews);
                 createProduct(Product,isLiked);
 
@@ -164,8 +164,45 @@ public class ProductDetailActivity extends AppCompatActivity {
 
                         }
                     });
+                    //AR statique a changer
+                    Intent intentDecoration = new Intent(ProductDetailActivity.this,ArDecorationActivity.class);
+                    Intent intentFashion = new Intent(ProductDetailActivity.this,ArCustomFaceFiltreActivity.class);
+                        if (Product.getDescription().equals("model") || Product.getDescription().equals("model2") || Product.getDescription().equals("plante") ||Product.getDescription().equals("tree")   ) {
+                            btnArView.setVisibility(View.VISIBLE);
+                            btnArView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    intentDecoration.putExtra("name",Product.getDescription());
+                                    startActivity(intentDecoration);
+                                }
+                            });
+                        }
+                        if (Product.getDescription().equals("dhia") || Product.getDescription().equals("glasses") || Product.getDescription().equals("blueglasses") ||Product.getDescription().equals("black_sunglasses")   ) {
+                            btnArView.setVisibility(View.VISIBLE);
+                            btnArView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    intentFashion.putExtra("name",Product.getDescription());
+                                    intentFashion.putExtra("nameFiltre","null");
+                                    startActivity(intentFashion);
+                                }
+                            });
+                        }
+                    if (Product.getDescription().equals("makeup") || Product.getDescription().equals("makeup2")) {
+                        btnArView.setVisibility(View.VISIBLE);
+                        btnArView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                intentFashion.putExtra("name","null");
+                                intentFashion.putExtra("nameFiltre",Product.getDescription());
+                                startActivity(intentFashion);
+                            }
+                        });
+                    }
+
                 }
-            }
+                }
+
         });
 
     }
