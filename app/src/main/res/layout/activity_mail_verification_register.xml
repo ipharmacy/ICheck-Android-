@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    tools:context=".MailVerificationRegisterActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_marginStart="125dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorBlue"
+            android:src="@drawable/ic_email_24" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="125dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/josefinsemibold"
+            android:text="Verification Code"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="60dp"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/josefinsemibold"
+            android:textSize="15dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/input1"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:fontFamily="@font/josefinsemibold"
+                tools:ignore="labelFor"
+                />
+            <EditText
+                android:id="@+id/input2"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:fontFamily="@font/josefinsemibold"
+                tools:ignore="labelFor"
+                />
+            <EditText
+                android:id="@+id/input3"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:fontFamily="@font/josefinsemibold"
+                tools:ignore="labelFor"
+                />
+            <EditText
+                android:id="@+id/input4"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:fontFamily="@font/josefinsemibold"
+                tools:ignore="labelFor"
+                />
+            <EditText
+                android:id="@+id/input5"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:fontFamily="@font/josefinsemibold"
+                tools:ignore="labelFor"
+                />
+            <EditText
+                android:id="@+id/input6"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:fontFamily="@font/josefinsemibold"
+                tools:ignore="labelFor"
+                />
+
+        </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    >
+    <Button
+        android:id="@+id/verificationSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/custom_login"
+        android:fontFamily="@font/josefinsemibold"
+        android:text="Send"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF">
+
+    </Button>
+</LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</ScrollView>

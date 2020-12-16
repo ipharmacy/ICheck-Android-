@@ -26,7 +26,7 @@ public class ArCustomFaceFiltreActivity extends AppCompatActivity {
         ArCustomFaceFiltre arCustomFaceFiltre = (ArCustomFaceFiltre) getSupportFragmentManager().findFragmentById(R.id.IdArFaceFiltre);
         ModelRenderable.builder()
                // .setSource(this,R.raw.)
-                .setSource(this, Uri.parse("face-time.sfb"))
+                .setSource(this,Uri.parse("black_sunglasses.sfb"))
                 .build()
                 .thenAccept(renderable -> {
                     modelRenderable = renderable;
@@ -35,7 +35,7 @@ public class ArCustomFaceFiltreActivity extends AppCompatActivity {
 
                 });
         Texture.builder()
-                .setSource(this,R.drawable.dogface)
+                .setSource(this,R.drawable.makeup)
                 .build()
                 .thenAccept(texture ->this.texture = texture);
         arCustomFaceFiltre.getArSceneView().setCameraStreamRenderPriority(Renderable.RENDER_PRIORITY_FIRST);

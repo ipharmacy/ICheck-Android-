@@ -119,6 +119,8 @@ public class register extends AppCompatActivity  {
                     Toast.makeText(register.this, "Success ", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(register.this,registerimage.class);
                     intent.putExtra("email",email);
+                    intent.putExtra("firstname",firstname);
+                    intent.putExtra("lastname",lastname);
                     startActivity(intent);
                     //overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 }

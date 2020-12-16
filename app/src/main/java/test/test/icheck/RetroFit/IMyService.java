@@ -49,4 +49,10 @@ public interface IMyService {
     Call<ProductDetails> getProductDetails(@Body HashMap<String,String> map);
     @POST("user/getFavorite")
     Call<Customer> getUserFavorite(@Body HashMap<String,String> map);
+    @POST("user/sendVerificationCode")
+    Call<HashMap<String,String>> sendVerificationCode(@Body HashMap<String,String> map);
+
+    @POST("user/verifyAccount")
+    Call<Customer> verifyAccount(@Body HashMap<String,String> map);
+
 }

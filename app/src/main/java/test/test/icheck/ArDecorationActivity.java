@@ -22,7 +22,7 @@ public class ArDecorationActivity extends AppCompatActivity {
         arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
             Anchor  anchor = hitResult.createAnchor();
             ModelRenderable.builder()
-                    .setSource(this, Uri.parse("model2.sfb"))
+                    .setSource(this, Uri.parse("tree.sfb"))
                     .build()
                     .thenAccept(modelRenderable -> addModelToScene(anchor,modelRenderable))
                     .exceptionally(throwable -> {

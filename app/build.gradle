@@ -68,7 +68,7 @@ dependencies {
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
 }
 apply plugin: 'com.google.ar.sceneform.plugin'
-sceneform.asset('sampledata/face-time.obj',
+sceneform.asset('sampledata/tree.fbx',
                 'default',                    // 'Material Path' specified during import.
-                'sampledata/face-time.sfa',
-                'src/main/assets/face-time')
+                'sampledata/tree.sfa',
+                'src/main/assets/tree')

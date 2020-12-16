@@ -137,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"Password does not match ",Toast.LENGTH_SHORT).show();
                 }else if(response.code()== 202 ){
                     Toast.makeText(MainActivity.this,"no user found",Toast.LENGTH_SHORT).show();
+                }else if (response.code() == 203){
+                    Toast.makeText(MainActivity.this,"Account is not verified",Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -12,7 +12,7 @@
 
     <uses-feature
         android:name="android.hardware.camera.ar"
-        android:required="true" />
+        android:value="required" />
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -28,7 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ArCustomFaceFiltreActivity"></activity>
+        <activity android:name=".MailVerificationRegisterActivity"></activity>
+        <activity android:name=".ArCustomFaceFiltreActivity" />
         <activity android:name=".ArDecorationActivity" />
         <activity android:name=".ChatBotActivity" />
         <activity android:name=".ProductDetailsReviews" />

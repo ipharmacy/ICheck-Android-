@@ -49,6 +49,7 @@ public class registerimage extends AppCompatActivity implements AdapterView.OnIt
     String pathToFile;
     String imageName = "vide";
     String email = "";
+    String firstname,lastname;
     String picturePath;
     private static final int PERMISSION_REQUEST=0;
     private static final int RESULT_LOAD_IMAGE=1;
@@ -58,7 +59,9 @@ public class registerimage extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_registerimage);
         Bundle extras = getIntent().getExtras();
         email= extras.getString("email");
-        System.out.println("email : ++ "+email);
+        firstname = extras.getString("firstname");
+        lastname = extras.getString("lastname");
+        System.out.println("email : first : last  "+email+" "+firstname+" "+lastname);
         btn = (Button)findViewById(R.id.id_buttonUpdateAvatar);
         update = (Button)findViewById(R.id.id_updateAvatar) ;
         image = (ImageView)findViewById(R.id.id_imageAvatar);
@@ -98,11 +101,13 @@ public class registerimage extends AppCompatActivity implements AdapterView.OnIt
         Call called = iMyService.updateAvatar(map);
         called.enqueue(new Callback() {
 
-
             @Override
             public void onResponse(Call call, Response response) {
                 Toast.makeText(registerimage.this, "User added succesfuly ", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(registerimage.this,MainActivity.class);
+                Intent intent = new Intent(registerimage.this,MailVerificationRegisterActivity.class);
+                intent.putExtra("email",email);
+                intent.putExtra("firstname",firstname);
+                intent.putExtra("lastname",lastname);
                 startActivity(intent);
             }
 
@@ -170,34 +175,4 @@ public class registerimage extends AppCompatActivity implements AdapterView.OnIt
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-   /* private void dispatchPictureTakerAction() {
-        Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePic.resolveActivity(getPackageManager()) != null ){
-            File photoFile = null;
-            photoFile = createPhotoFile();
-            if(photoFile != null ){
-                pathToFile = photoFile.getAbsolutePath();
-                Uri photoURI = FileProvider.getUriForFile(registerimage.this,"test.test.icheck.fileprovider",photoFile);
-                takePic.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
-                startActivityForResult(takePic,1) ;
-            }
-
-
-
-        }
-    }
-
-    private File createPhotoFile() {
-        String name = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File image = null;
-        try {
-            image = File.createTempFile(name,".jpg",storageDir);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return image;
-    }*/
-
 }
