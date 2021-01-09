@@ -2,9 +2,12 @@ package test.test.icheck;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -40,11 +43,13 @@ public class AllProductsActivity extends AppCompatActivity {
     IMyService iMyService;
     EditText searchProduct;
     SearchView searchView;
+    TextView allCategories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_products);
          searchView = (SearchView) findViewById(R.id.searchView);
+         allCategories = (TextView)findViewById(R.id.id_allcategories);
         productList = new ArrayList<Product>();
        loadAllProducts(productList);
     }
@@ -80,6 +85,12 @@ public class AllProductsActivity extends AppCompatActivity {
                 if (products.size() > 0){
                     createCategoryListView(products);
                     createProductListView( products);
+                    allCategories.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            createProductListView( products);
+                        }
+                    });
 
                 }else{
                     System.out.println("Erreur liste ");

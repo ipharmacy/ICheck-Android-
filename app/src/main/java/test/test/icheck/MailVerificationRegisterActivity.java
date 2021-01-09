@@ -83,11 +83,10 @@ String  verificationCode;
                editor.putString("userId",result.getId());
                editor.apply();
                System.out.println( "Email back"+result.getEmail()+result.getFirstName()+" IDD MAWJOUD : "+result.getId());
-               Toast.makeText(MailVerificationRegisterActivity.this, "Succes " + result, Toast.LENGTH_SHORT).show();
+               Toast.makeText(MailVerificationRegisterActivity.this, "Welcome " +result.getFirstName()+" "+result.getLastName(), Toast.LENGTH_SHORT).show();
                Intent intent = new Intent(MailVerificationRegisterActivity.this, HomeActivity.class);
                startActivity(intent);
            }
-
            @Override
            public void onFailure(Call<Customer> call, Throwable t) {
 
@@ -108,6 +107,7 @@ String  verificationCode;
             @Override
             public void onResponse(Call call, Response response) {
                 System.out.println("Mail send : verification code : "+verificationCode +" "+response.body() );
+                Toast.makeText(MailVerificationRegisterActivity.this, "Mail send : verification code : "+verificationCode , Toast.LENGTH_SHORT).show();
             }
 
             @Override

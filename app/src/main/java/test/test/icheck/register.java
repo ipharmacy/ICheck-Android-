@@ -53,6 +53,7 @@ public class register extends AppCompatActivity  {
     EditText lastName;
     EditText email;
     EditText password;
+    EditText confirmPassword;
     private SharedPreferences sp ;
     public static final String FILE_NAME = "test.test.icheck.shared";
     @Override
@@ -72,26 +73,35 @@ public class register extends AppCompatActivity  {
         lastName = (EditText)findViewById(R.id.id_lastName);
         email = (EditText)findViewById(R.id.id_email);
         password = (EditText)findViewById(R.id.id_password);
+        confirmPassword = (EditText)findViewById(R.id.id_confirmpassword);
         Retrofit retrofitClient = RetrofitClient.getInstance();
         iMyService = retrofitClient.create(IMyService.class);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(firstName.getText().toString())){
-                    Toast.makeText(v.getContext(),"firstName is Empty",Toast.LENGTH_SHORT).show();
+                boolean testName = validtaeString(firstName.getText().toString());
+                boolean testLastName = validtaeString(lastName.getText().toString());
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                System.out.println("test");
+                if(TextUtils.isEmpty(firstName.getText().toString()) || !testName){
+                    Toast.makeText(v.getContext(),"Please verify your firstname",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(lastName.getText().toString())){
-                    Toast.makeText(v.getContext(),"lastName is Empty",Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(lastName.getText().toString()) || !testLastName){
+                    Toast.makeText(v.getContext(),"Please verify your lastname",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(email.getText().toString())){
-                    Toast.makeText(v.getContext(),"email is Empty",Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(email.getText().toString()) || !(email.getText().toString().trim().matches(emailPattern)) ){
+                    Toast.makeText(v.getContext(),"Please verify your Email",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(password.getText().toString())){
-                    Toast.makeText(v.getContext(),"password is Empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(),"Password is Empty",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!(confirmPassword.getText().toString().equals(password.getText().toString()))){
+                    Toast.makeText(v.getContext(),"Confirm password does not match",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 registerUser(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString());
@@ -102,9 +112,6 @@ public class register extends AppCompatActivity  {
         });
     }
     private void registerUser(String firstname, final String lastname, final String email, String password) {
-
-        System.out.println("user "+" "+firstname+ " " +lastname+" "+email+" "+password);
-
         HashMap<String,String> map = new HashMap<>();
         map.put("firstName",firstname);
         map.put("lastName",lastname);
@@ -114,7 +121,6 @@ public class register extends AppCompatActivity  {
         called.enqueue(new Callback<Customer>() {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
-
                 if (response.code()== 200 ) {
                     Toast.makeText(register.this, "Success ", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(register.this,registerimage.class);
@@ -127,14 +133,12 @@ public class register extends AppCompatActivity  {
                 else if (response.code()== 201 ) {
                     Toast.makeText(register.this, "User already exists ! ", Toast.LENGTH_SHORT).show();
                 }
-
             }
             @Override
             public void onFailure(Call<Customer> call, Throwable t) {
                 Toast.makeText(register.this, "FAIL ", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
     public void sessionDestroy(){
         sp= getSharedPreferences(FILE_NAME,MODE_PRIVATE);
@@ -150,4 +154,16 @@ public class register extends AppCompatActivity  {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+    public boolean validtaeString(String str) {
+        str = str.toLowerCase();
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            char ch = charArray[i];
+            if (!(ch >= 'a' && ch <= 'z') && !(ch >= 'A' && ch <= 'Z') ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

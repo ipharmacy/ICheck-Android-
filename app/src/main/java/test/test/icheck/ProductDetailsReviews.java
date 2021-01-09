@@ -1,14 +1,14 @@
 package test.test.icheck;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,12 +33,16 @@ public class ProductDetailsReviews extends AppCompatActivity {
     IMyService iMyService;
     ArrayList<reviews> reviewList;
     private static test.test.icheck.entity.Product Product;
+    Product getproduct = new Product();
+    private SharedPreferences sp ;
+    public static final String FILE_NAME = "test.test.icheck.shared";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details_reviews);
         recyclerView = (RecyclerView)findViewById(R.id.id_rvAllReviews);
         Bundle extras = getIntent().getExtras();
+        sp = getApplicationContext().getSharedPreferences(MainActivity.FILE_NAME,MODE_PRIVATE);
         if(extras == null) {
             productId= null;
             System.out.println("productId : Null ");
@@ -57,14 +61,68 @@ public class ProductDetailsReviews extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter2);
         adapter2.notifyDataSetChanged();
+
     }
+    ItemTouchHelper.SimpleCallback itemTouchHelper =
+            new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            if (getproduct.getReviews().get(viewHolder.getAdapterPosition()).getUser().getId().equals(sp.getString("userId",""))){
+                Retrofit retrofitClient = RetrofitClient.getInstance();
+                iMyService = retrofitClient.create(IMyService.class);
+                String ReviewId=getproduct.getReviews().get(viewHolder.getAdapterPosition()).getId();
+                System.out.println("Review Id "+ReviewId);
+                System.out.println("Product Id "+productId);
+                HashMap<String,String> map = new HashMap<>();
+                map.put("prodId",productId);
+                map.put("reviewId",ReviewId);
+                Call<HashMap<String, String>> call = iMyService.removeReview(map);
+                call.enqueue(new Callback<HashMap<String, String>>() {
+                    @Override
+                    public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                        System.out.println("Review deleted succus "+response.body());
+                        reviewList.remove(viewHolder.getAdapterPosition());
+                        adapter2.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+
+                    }
+                });
+
+
+            }else{
+                System.out.println("dont swipe");
+                return;
+            }
+
+        }
+                @Override
+                public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                    if (!(getproduct.getReviews().get(viewHolder.getAdapterPosition()).getUser().getId().equals(sp.getString("userId","")))){
+                        System.out.println("DONT SWIPE PLEASE");
+                        return 0;}
+                    return super.getSwipeDirs(recyclerView, viewHolder);
+                }
+
+    };
+
     private void createProduct(test.test.icheck.entity.Product Product) {
         getProduct(Product,new CompletionHandlerDetailsReview(){
             @Override
             public void productFetched(final test.test.icheck.entity.Product Product) {
                 if (Product != null){
+                    getproduct = Product;
                     reviewList = Product.getReviews();
                     createReviewsListView(Product.getReviews());
                 }

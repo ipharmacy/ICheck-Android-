@@ -13,7 +13,7 @@
         <EditText
             android:id="@+id/id_searchProduct"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:background="@drawable/input_search"
             android:drawableStart="@drawable/ic_search_24"
             android:drawablePadding="12dp"
@@ -59,7 +59,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/id_listProcuts"
             android:layout_width="0dp"
-            android:layout_height="207dp"
+            android:layout_height="300dp"
             android:layout_marginTop="4dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/josefinsemibold"
             android:text="Category"
             android:textColor="@android:color/black"
@@ -84,33 +83,72 @@
 
         <ImageView
             android:id="@+id/id_categoryHome"
-            android:layout_width="105dp"
-            android:layout_height="93dp"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/id_textCategory"
             app:srcCompat="@drawable/home" />
 
         <ImageView
-            android:id="@+id/id_categoryCosmetic"
-            android:layout_width="105dp"
-            android:layout_height="93dp"
+            android:id="@+id/id_filtrecat"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
+            android:alpha="0.2"
+            app:srcCompat="@drawable/filtrenoir"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_textCategory"
+            />
+        <ImageView
+            android:id="@+id/id_categoryCosmetic"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toStartOf="@+id/id_categoryFashion"
             app:layout_constraintStart_toEndOf="@+id/id_categoryHome"
             app:layout_constraintTop_toBottomOf="@+id/id_textCategory"
             app:srcCompat="@drawable/cosmetic" />
+        <ImageView
+            android:id="@+id/id_filtrecat2"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
+            android:alpha="0.2"
+            app:srcCompat="@drawable/filtrenoir"
+            app:layout_constraintEnd_toStartOf="@+id/id_categoryFashion"
+            app:layout_constraintStart_toEndOf="@+id/id_categoryHome"
+            app:layout_constraintTop_toBottomOf="@+id/id_textCategory"
+             />
 
         <ImageView
             android:id="@+id/id_categoryFashion"
-            android:layout_width="105dp"
-            android:layout_height="93dp"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/id_textCategory"
             app:srcCompat="@drawable/fashion" />
+
+        <ImageView
+            android:id="@+id/id_filtrecat3"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="0.2"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_textCategory"
+            app:srcCompat="@drawable/filtrenoir" />
 
         <TextView
             android:id="@+id/id_textFriends"
@@ -148,6 +186,45 @@
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/id_textFriends" />
+
+        <TextView
+            android:id="@+id/id_decorationcat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Decoration"
+            android:fontFamily="@font/josefinsemibold"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@+id/id_categoryHome"
+            app:layout_constraintEnd_toEndOf="@+id/id_categoryHome"
+            app:layout_constraintStart_toStartOf="@+id/id_categoryHome"
+            app:layout_constraintTop_toTopOf="@+id/id_categoryHome" />
+
+        <TextView
+            android:id="@+id/id_cosmeticcat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cosmetic"
+            android:fontFamily="@font/josefinsemibold"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@+id/id_categoryCosmetic"
+            app:layout_constraintEnd_toEndOf="@+id/id_categoryCosmetic"
+            app:layout_constraintStart_toStartOf="@+id/id_categoryCosmetic"
+            app:layout_constraintTop_toTopOf="@+id/id_categoryCosmetic" />
+
+        <TextView
+            android:id="@+id/id_fashioncat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fashion"
+            android:fontFamily="@font/josefinsemibold"
+            android:textSize="18dp"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/id_categoryFashion"
+            app:layout_constraintEnd_toEndOf="@+id/id_categoryFashion"
+            app:layout_constraintStart_toStartOf="@+id/id_categoryFashion"
+            app:layout_constraintTop_toTopOf="@+id/id_categoryFashion" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("userId",result.getId());
                         editor.apply();
                         System.out.println( "Email back"+result.getEmail()+result.getFirstName()+" IDD MAWJOUD : "+result.getId());
-                        Toast.makeText(MainActivity.this, "Succes " + result, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Welcome "+result.getFirstName()+" "+result.getLastName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                         startActivity(intent);
                     }
@@ -139,12 +139,18 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"no user found",Toast.LENGTH_SHORT).show();
                 }else if (response.code() == 203){
                     Toast.makeText(MainActivity.this,"Account is not verified",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, MailVerificationRegisterActivity.class);
+                    intent.putExtra("email",email);
+                    intent.putExtra("firstname",email);
+                    intent.putExtra("lastname",email);
+                    startActivity(intent);
                 }
             }
 
             @Override
             public void onFailure(Call<Customer> call, Throwable t) {
                 Toast.makeText(MainActivity.this,"Failure",Toast.LENGTH_SHORT).show();
+
             }
         });
 

@@ -23,9 +23,9 @@
                 <ImageView
                     android:id="@+id/id_imageProduit"
                     android:layout_width="0dp"
-                    android:layout_height="204dp"
+                    android:layout_height="300dp"
                     android:background="#000000"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:transitionName="transition"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -61,6 +61,28 @@
                     app:layout_constraintHorizontal_bias="0.087"
                     app:layout_constraintStart_toEndOf="@+id/id_productBrand"
                     app:layout_constraintTop_toBottomOf="@+id/id_imageProduit" />
+
+                <Button
+                    android:id="@+id/id_viewAr"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="@drawable/custom_login"
+                    android:backgroundTint="#000000"
+                    android:baselineAligned="false"
+                    android:fontFamily="@font/josefinsemibold"
+                    android:paddingStart="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="2dp"
+                    android:paddingBottom="2dp"
+                    android:text="Try the 3D model "
+                    android:textColor="@android:color/white"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/id_productAddress" />
 
                 <TextView
                     android:id="@+id/id_productAddress"
@@ -102,9 +124,9 @@
                 <TextView
                     android:id="@+id/id_productRate"
                     android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/custom_textview_available"
                     android:drawableStart="@drawable/ic_star_24"
                     android:drawablePadding="5dp"
@@ -129,13 +151,13 @@
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/id_productAddress" />
+                    app:layout_constraintTop_toBottomOf="@+id/id_viewAr" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/id_listPhotos"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/id_textPhotos" />
@@ -145,7 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/josefinsemibold"
                     android:text="Review &amp; Ratings"
                     android:textColor="@android:color/black"
@@ -159,7 +181,7 @@
                     android:id="@+id/id_listReviews"
                     android:layout_width="match_parent"
                     android:layout_height="193dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -169,6 +191,7 @@
                     android:id="@+id/id_rateReviewBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/custom_login"
                     android:fontFamily="@font/josefinsemibold"
@@ -179,7 +202,6 @@
                     android:text="RATE &amp; Review "
                     android:textColor="@android:color/white"
                     android:textSize="10dp"
-                    app:layout_constraintBottom_toTopOf="@+id/id_textPhotos"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/id_imageProduit" />
 
@@ -198,41 +220,19 @@
 
                 <ImageView
                     android:id="@+id/id_favorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_favorite24" />
 
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/id_viewAr"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/custom_login"
-                    android:fontFamily="@font/josefinsemibold"
-                    android:paddingStart="2dp"
-                    android:paddingTop="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="Try the 3D model "
-                    android:textColor="@android:color/white"
-                    android:textSize="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
+
     </ScrollView>
 </FrameLayout>

@@ -54,5 +54,7 @@ public interface IMyService {
 
     @POST("user/verifyAccount")
     Call<Customer> verifyAccount(@Body HashMap<String,String> map);
+    @POST("products/removeReview")
+    Call<HashMap<String,String>> removeReview(@Body HashMap<String,String> map);
 
 }

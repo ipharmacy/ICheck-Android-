@@ -39,6 +39,7 @@ public class BottomSheetReview  extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.row_add_item,container,false);
         ReviewInput = (EditText)view.findViewById(R.id.ReviewText) ;
         rateBar = (RatingBar)view.findViewById(R.id.BarRate);
+        rateBar.setRating(5);
         submitRate = (Button)view.findViewById(R.id.OnSubmit);
         Bundle mArgs = getArguments();
         String prodId = mArgs.getString("prodId");
@@ -49,31 +50,36 @@ public class BottomSheetReview  extends BottomSheetDialogFragment {
             public void onClick(View v) {
                 final String rate = Float.toString(rateBar.getRating());
                 final String review = ReviewInput.getText().toString();
-                Retrofit retrofitClient = RetrofitClient.getInstance();
-                iMyService = retrofitClient.create(IMyService.class);
-                HashMap<String,String> map = new HashMap<>();
-                map.put("prodId",prodId);
-                map.put("review",review);
-                map.put("userId",userId);
-                map.put("rate",rate);
-                Call<HashMap<String,String>> call = iMyService.addReview(map);
-                call.enqueue(new Callback<HashMap<String, String>>() {
-                    @Override
-                    public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
-                      //  Toast.makeText(ProductDetailActivity.this, "Sucess  "+response.body().get("message"), Toast.LENGTH_SHORT).show();
-                        //System.out.println("reviewList : "+reviewList);
-                        Intent intent = new Intent(getActivity(),ProductDetailActivity.class);
-                       intent.putExtra("productId",prodId);
-                       intent.putExtra("review",review);
-                        intent.putExtra("rate",rate);
-                        startActivity(intent);
-                    }
+                if (ReviewInput.getText().toString().isEmpty()){
+                    Toast.makeText(BottomSheetReview.super.getContext(),"Please write a review ",Toast.LENGTH_SHORT).show();
+                }else {
+                    Retrofit retrofitClient = RetrofitClient.getInstance();
+                    iMyService = retrofitClient.create(IMyService.class);
+                    HashMap<String,String> map = new HashMap<>();
+                    map.put("prodId",prodId);
+                    map.put("review",review);
+                    map.put("userId",userId);
+                    map.put("rate",rate);
+                    Call<HashMap<String,String>> call = iMyService.addReview(map);
+                    call.enqueue(new Callback<HashMap<String, String>>() {
+                        @Override
+                        public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                            //  Toast.makeText(ProductDetailActivity.this, "Sucess  "+response.body().get("message"), Toast.LENGTH_SHORT).show();
+                            //System.out.println("reviewList : "+reviewList);
+                            Intent intent = new Intent(getActivity(),ProductDetailActivity.class);
+                            intent.putExtra("productId",prodId);
+                            intent.putExtra("review",review);
+                            intent.putExtra("rate",rate);
+                            startActivity(intent);
+                        }
 
-                    @Override
-                    public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
-                       // Toast.makeText(ProductDetailActivity.this, "FAIL ", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+                            // Toast.makeText(ProductDetailActivity.this, "FAIL ", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
             }
         });
         return view;

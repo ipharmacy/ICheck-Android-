@@ -47,7 +47,7 @@ public class registerimage extends AppCompatActivity implements AdapterView.OnIt
     Bitmap mBitmap;
     IMyService iMyService;
     String pathToFile;
-    String imageName = "vide";
+    String imageName = "default";
     String email = "";
     String firstname,lastname;
     String picturePath;
@@ -64,6 +64,7 @@ public class registerimage extends AppCompatActivity implements AdapterView.OnIt
         System.out.println("email : first : last  "+email+" "+firstname+" "+lastname);
         btn = (Button)findViewById(R.id.id_buttonUpdateAvatar);
         update = (Button)findViewById(R.id.id_updateAvatar) ;
+        update.setVisibility(View.INVISIBLE);
         image = (ImageView)findViewById(R.id.id_imageAvatar);
         upload = (Button)findViewById(R.id.id_uploadImageServer);
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
@@ -118,27 +119,35 @@ public class registerimage extends AppCompatActivity implements AdapterView.OnIt
         });
     }
     private void uploadImage() {
-        File file = new File(picturePath);
-        final RequestBody requestBody = RequestBody.create(MediaType.parse("image/"),file);
-        imageName = file.getName();
-        MultipartBody.Part part = MultipartBody.Part.createFormData("upload",file.getName(),requestBody);
-        RequestBody data = RequestBody.create(MediaType.parse("text/plain"),"upload");
-        Retrofit retrofit = RetrofitClient.getInstance();
-        IMyService uploadImage = retrofit.create(IMyService.class);
-        Call call = uploadImage.postImage(part , data);
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-                if (response.code() == 200) {
-                    System.out.println("Uploaded " +response.body());
-                    Toast.makeText(registerimage.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+        if (picturePath.isEmpty()){
+            Toast.makeText(registerimage.this, "You need to select an image", Toast.LENGTH_SHORT).show();
+        }else {
+            File file = new File(picturePath);
+            final RequestBody requestBody = RequestBody.create(MediaType.parse("image/"),file);
+            imageName = file.getName();
+            MultipartBody.Part part = MultipartBody.Part.createFormData("upload",file.getName(),requestBody);
+            RequestBody data = RequestBody.create(MediaType.parse("text/plain"),"upload");
+            Retrofit retrofit = RetrofitClient.getInstance();
+            IMyService uploadImage = retrofit.create(IMyService.class);
+            Call call = uploadImage.postImage(part , data);
+            call.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+                    if (response.code() == 200) {
+                        System.out.println("Uploaded " +response.body());
+                        Toast.makeText(registerimage.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+                        update.setVisibility(View.VISIBLE);
+                        upload.setVisibility(View.INVISIBLE);
+
+                    }
                 }
-            }
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                Toast.makeText(registerimage.this, "Image Failed", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    Toast.makeText(registerimage.this, "Image Failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
     }
 
     @Override

@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
     private static ProductAdapter adapter;
     IMyService iMyService;
     String json_string;
-    TextView seeAllProducts,chatBot,id_textTrendingProducts;
+    TextView seeAllProducts,chatBot,id_textTrendingProducts,fashion,decoration,cosmetic;
     ImageView id_categoryHome;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
@@ -61,6 +61,9 @@ public class HomeFragment extends Fragment {
         //createFriendListView(v);
         seeAllProducts = (TextView)v.findViewById(R.id.id_seeAllProducts);
         id_textTrendingProducts=(TextView)v.findViewById(R.id.id_textTrendingProducts);
+        fashion=(TextView)v.findViewById(R.id.id_fashioncat);
+        decoration=(TextView)v.findViewById(R.id.id_decorationcat);
+        cosmetic=(TextView)v.findViewById(R.id.id_cosmeticcat);
         id_categoryHome = (ImageView)v.findViewById(R.id.id_categoryHome);
         chatBot = (TextView)v.findViewById(R.id.id_chatBots);
         chatBot.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +80,28 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        fashion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AllProductsActivity.class);
+                startActivity(intent);
+            }
+        });
+        decoration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AllProductsActivity.class);
+                startActivity(intent);
+            }
+        });
+        cosmetic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AllProductsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return v;
     }
     public void createProductListView(final View v,List<Product> productList){

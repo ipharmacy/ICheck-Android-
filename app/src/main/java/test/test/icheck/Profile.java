@@ -61,12 +61,12 @@ public class Profile extends Fragment {
         firstName = (TextView)v.findViewById(R.id.textView2);
         email = (TextView)v.findViewById(R.id.textView3);
         avatar = (ImageView)v.findViewById(R.id.roundedImageView);
-        producImage = (ImageView)v.findViewById(R.id.imageView3);
+        /*producImage = (ImageView)v.findViewById(R.id.imageView3);
         imageBrand = (ImageView)v.findViewById(R.id.id_productBrand2);
         productName = (TextView)v.findViewById(R.id.id_productName2);
         productDescription = (TextView)v.findViewById(R.id.id_productAddress2);
-        seeAllProduct = (TextView)v.findViewById(R.id.id_seelAllProfilImage);
-        createFavoriteProduct();
+        seeAllProduct = (TextView)v.findViewById(R.id.id_seelAllProfilImage);*/
+        //createFavoriteProduct();
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

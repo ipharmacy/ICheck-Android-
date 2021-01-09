@@ -10,15 +10,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="0dp"
+            android:layout_height="66dp"
+            android:background="@color/grey"
+            android:text="\n"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/id_imageReview"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="4dp"
+
+            android:layout_marginTop="4dp"
             android:background="@drawable/layer_list_logobrand_product"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            app:riv_corner_radius="30dip"
+            app:riv_mutate_background="true"
+            app:riv_oval="true"
+            app:riv_tile_mode="repeat" />
 
         <TextView
             android:id="@+id/id_reviewName"
@@ -26,21 +43,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="2dp"
-            android:elevation="8dp"
             android:fontFamily="@font/josefinsemibold"
             android:text="Dhia Ben Hamouda"
             android:textColor="@android:color/black"
             app:layout_constraintStart_toEndOf="@+id/id_imageReview"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <TextView
             android:id="@+id/id_reviewMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
             android:fontFamily="@font/josefinregular"
             android:text="I liked that they arrived promptly and they were a perfect fit"
-            android:textColor="@color/colorBlue"
+            android:textColor="@color/colorAccent"
             android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@+id/id_imageReview"
             app:layout_constraintTop_toBottomOf="@+id/id_reviewName" />
@@ -53,21 +70,22 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/custom_textview_available"
             android:drawableStart="@drawable/ic_star_24"
-            android:drawablePadding="5dp"
 
+            android:drawablePadding="5dp"
             android:fontFamily="@font/josefinregular"
             android:paddingStart="1dp"
             android:text="4.5"
             android:textColor="@android:color/black"
             android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <TextView
             android:id="@+id/id_createdAtReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/josefinregular"
             android:text="12/05/2020 : 15:40"
             android:textColor="@android:color/black"
@@ -75,6 +93,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/id_reviewMessage" />
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="0dp"
+            android:layout_height="7dp"
+            android:background="@color/grey"
+            android:text="\n"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
