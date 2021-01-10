@@ -1,6 +1,7 @@
 package test.test.icheck.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import test.test.icheck.ProfilUserActivity;
 import test.test.icheck.R;
 import test.test.icheck.entity.reviews;
 import test.test.icheck.refreshDetails;
@@ -77,6 +79,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
             String fullPath = pathImage+dataSet.get(listPosition).getUser().getAvatar();
             ImageView image = holder.image;
             Glide.with(context).load(fullPath).into(image);
+
         }
         TextView name = holder.name;
         TextView rate = holder.rate;
@@ -94,6 +97,20 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
         rate.setText(rate2);
         message.setText(dataSet.get(listPosition).getReview());
         //image.setImageResource(dataSet.get(listPosition).getImage());
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProfilUserActivity.class);
+                intent.putExtra("id",dataSet.get(listPosition).getUser().getId());
+                intent.putExtra("firstName",dataSet.get(listPosition).getUser().getFirstName());
+                intent.putExtra("lastName",dataSet.get(listPosition).getUser().getLastName());
+                intent.putExtra("avatar",dataSet.get(listPosition).getUser().getAvatar());
+                intent.putExtra("email",dataSet.get(listPosition).getUser().getEmail());
+                intent.putExtra("phone",dataSet.get(listPosition).getUser().getPhone());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

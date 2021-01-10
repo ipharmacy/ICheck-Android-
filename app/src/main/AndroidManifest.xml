@@ -28,14 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchableActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/search_users"/>
-        </activity>
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ProfilUserActivity"></activity>
+        <activity android:name=".ChatActivity" />
         <activity android:name=".MailVerificationRegisterActivity" />
         <activity android:name=".ArCustomFaceFiltreActivity" />
         <activity android:name=".ArDecorationActivity" />
@@ -58,7 +52,8 @@
 
         <activity android:name=".ProductDetailActivity" />
         <activity android:name=".HomeActivity">
-            <meta-data android:name="android.app.default_searchable"
+            <meta-data
+                android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
         <activity android:name=".register" />

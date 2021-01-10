@@ -267,11 +267,13 @@ public class ProductDetailActivity extends AppCompatActivity {
               Toast.makeText(getApplicationContext(),"Added succesfuly",Toast.LENGTH_SHORT).show();
               favorite.setImageResource(R.drawable.ic_favoriteliked_24);
               isLiked = "1";
+              System.out.println("AJOUT "+isLiked);
 
           }
 
           @Override
           public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+              Toast.makeText(getApplicationContext(),"Removed succesfuly",Toast.LENGTH_SHORT).show();
               System.out.println("Failed favoris ");
           }
       });

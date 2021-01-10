@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_notification_cv"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageNotification"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="28dp"
+            android:background="@drawable/layer_list_logobrand_product"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="30dip"
+            app:riv_mutate_background="true"
+            app:riv_oval="true"
+            app:riv_tile_mode="repeat" />
+
+        <TextView
+            android:id="@+id/id_notificationName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/josefinsemibold"
+            android:text="Dhia Ben Hamouda"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageNotification"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textMessageNotification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/josefinsemibold"
+            android:text="Dhia Ben Hamouda sent you a friend request"
+            android:textColor="#301E1E1E"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/imageNotification"
+            app:layout_constraintTop_toBottomOf="@+id/id_notificationName" />
+
+        <Button
+            android:id="@+id/acceptNotification"
+            android:layout_width="88dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="20dp"
+            android:background="#5663FF"
+            android:fontFamily="@font/josefinmeduim"
+            android:padding="8dp"
+            android:text="Accept"
+
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageNotification"
+            app:layout_constraintTop_toBottomOf="@+id/textMessageNotification" />
+
+        <Button
+            android:id="@+id/declineNotification"
+            android:layout_width="88dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/white"
+            android:fontFamily="@font/josefinmeduim"
+            android:padding="8dp"
+
+            android:text="Decline"
+            android:textColor="#848DFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/acceptNotification"
+            app:layout_constraintTop_toBottomOf="@+id/textMessageNotification" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

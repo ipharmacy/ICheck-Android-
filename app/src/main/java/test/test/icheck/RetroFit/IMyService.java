@@ -15,7 +15,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import test.test.icheck.entity.Customer;
 import test.test.icheck.entity.Favorite;
+import test.test.icheck.entity.Friendship;
 import test.test.icheck.entity.MessageChat;
+import test.test.icheck.entity.Notification;
 import test.test.icheck.entity.Product;
 import test.test.icheck.entity.ProductDetails;
 
@@ -64,6 +66,15 @@ public interface IMyService {
     Call<ArrayList<MessageChat>> getMessages(@Body HashMap<String,String> map);
     @GET("user/friends")
     Call<ArrayList<Customer>> getAllCustomers();
-
+    @POST("user/addFriendship")
+    Call<HashMap<String,String>> sendRequest(@Body HashMap<String,String> map);
+    @POST("user/acceptFriendship")
+    Call<HashMap<String,String>> acceptRequest(@Body HashMap<String,String> map);
+    @POST("user/declineFriendship")
+    Call<HashMap<String,String>> declineRequest(@Body HashMap<String,String> map);
+    @POST("user/getNotificationsForDhia")
+    Call<ArrayList<Notification>> getNotifications(@Body HashMap<String,String> map);
+    @POST("user/getFriendship")
+    Call<ArrayList<Friendship>> getFriendship(@Body HashMap<String,String> map);
 
 }
