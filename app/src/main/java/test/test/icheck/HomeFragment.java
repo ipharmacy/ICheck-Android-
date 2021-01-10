@@ -9,12 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -26,10 +24,10 @@ import test.test.icheck.RetroFit.RetrofitClient;
 import test.test.icheck.adapter.FriendsAdapter;
 //import test.test.icheck.adapter.productAdapter;
 import test.test.icheck.adapter.ProductAdapter;
+import test.test.icheck.entity.Customer;
 import test.test.icheck.entity.friends;
 import test.test.icheck.entity.Product;
 import test.test.icheck.entity.reviews;
-
 interface CompletionHandler {
     public void prodectFetched(List<Product> products);
 }
@@ -58,7 +56,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         productList = new ArrayList<Product>();
         createProductListView(v,productList);
-        //createFriendListView(v);
+        createFriendListView(v);
         seeAllProducts = (TextView)v.findViewById(R.id.id_seeAllProducts);
         id_textTrendingProducts=(TextView)v.findViewById(R.id.id_textTrendingProducts);
         fashion=(TextView)v.findViewById(R.id.id_fashioncat);
@@ -85,6 +83,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),AllProductsActivity.class);
                 startActivity(intent);
+           /*
+                Intent intent = new Intent(getActivity(),ChatActivity.class);
+                startActivity(intent);*/
             }
         });
         decoration.setOnClickListener(new View.OnClickListener() {
@@ -126,36 +127,29 @@ public class HomeFragment extends Fragment {
         });
     }
     public void createFriendListView(View v){
-        friends f1 = new friends(R.drawable.dhialogo,"nike");
-        friends f2 = new friends(R.drawable.youssef,"nike");
-        friends f3 = new friends(R.drawable.eya,"nike");
-        friends f4 = new friends(R.drawable.hamza,"nike");
-        friends f5 = new friends(R.drawable.chekib,"nike");
-        friends f6 = new friends(R.drawable.mbarki,"nike");
+        Retrofit retrofitClient = RetrofitClient.getInstance();
+        iMyService = retrofitClient.create(IMyService.class);
+        Call <ArrayList<Customer>> call = iMyService.getAllCustomers();
+        call.enqueue(new Callback<ArrayList<Customer>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Customer>> call, Response<ArrayList<Customer>> response) {
+                ArrayList<Customer> allUsers = new ArrayList<>();
+                allUsers = response.body();
+                adapterf = new FriendsAdapter(allUsers,getContext());
+                recyclerView = (RecyclerView) v.findViewById(R.id.id_listFriends);
+                layoutManager = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(adapterf);
+            }
 
-        friends f7 = new friends(R.drawable.salsabil,"nike");
-        friends f8 = new friends(R.drawable.mehdi,"nike");
+            @Override
+            public void onFailure(Call<ArrayList<Customer>> call, Throwable t) {
 
-        friendsList = new ArrayList<friends>();
-        friendsList.add(f1);
-        friendsList.add(f2);
-        friendsList.add(f3);
-        friendsList.add(f4);
-        friendsList.add(f5);
-        friendsList.add(f6);
-
-        friendsList.add(f7);
-        friendsList.add(f8);
-
-        adapterf = new FriendsAdapter(friendsList);
-        recyclerView = (RecyclerView) v.findViewById(R.id.id_listFriends);
-        layoutManager = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapterf);
+            }
+        });
     }
-
 
     public void getProducts(final List<Product> productList, final CompletionHandler handler ){
         Retrofit retrofitClient = RetrofitClient.getInstance();

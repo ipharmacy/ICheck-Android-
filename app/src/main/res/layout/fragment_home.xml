@@ -10,22 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/id_searchProduct"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:background="@drawable/input_search"
-            android:drawableStart="@drawable/ic_search_24"
-            android:drawablePadding="12dp"
-            android:ems="10"
-            android:fontFamily="@font/josefinsemibold"
-            android:hint="Search Product"
-            android:inputType="textPersonName"
-            android:paddingStart="12dp"
-            android:textColorHint="@color/colorAccent"
-            android:textSize="14sp"
 
+        <SearchView
+            android:id="@+id/searchUser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.537"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +32,7 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/id_searchProduct" />
+            app:layout_constraintTop_toBottomOf="@+id/searchUser" />
 
         <TextView
             android:id="@+id/id_seeAllProducts"
@@ -54,7 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.833"
             app:layout_constraintStart_toEndOf="@+id/id_textTrendingProducts"
-            app:layout_constraintTop_toBottomOf="@+id/id_searchProduct" />
+            app:layout_constraintTop_toBottomOf="@+id/searchUser" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/id_listProcuts"
@@ -165,14 +156,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/id_categoryHome" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/id_listFriends"
-            android:layout_width="356dp"
-            android:layout_height="66dp"
-            android:layout_marginTop="8dp"
+        <TextView
+            android:id="@+id/id_textFriends2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/josefinsemibold"
+            android:text="Friends"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/id_textFriends" />
+            app:layout_constraintTop_toBottomOf="@+id/id_chatBots" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/id_listFriends"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_textFriends2" />
 
         <TextView
             android:id="@+id/id_chatBots"

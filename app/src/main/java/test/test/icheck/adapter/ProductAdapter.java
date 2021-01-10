@@ -51,8 +51,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                                            int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.custom_cardview, parent, false);
-
-
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -89,7 +87,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return dataSet.size();

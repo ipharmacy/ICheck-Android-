@@ -99,22 +99,15 @@ public class ProductDetailsReviews extends AppCompatActivity {
 
                     }
                 });
-
-
-            }else{
-                System.out.println("dont swipe");
-                return;
             }
-
         }
                 @Override
                 public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                     if (!(getproduct.getReviews().get(viewHolder.getAdapterPosition()).getUser().getId().equals(sp.getString("userId","")))){
-                        System.out.println("DONT SWIPE PLEASE");
+                        System.out.println("DONT SWIPE");
                         return 0;}
                     return super.getSwipeDirs(recyclerView, viewHolder);
                 }
-
     };
 
     private void createProduct(test.test.icheck.entity.Product Product) {

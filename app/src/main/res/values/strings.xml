@@ -2,5 +2,7 @@
     <string name="app_name">icheck</string>
     <string name="bg">bg</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="app_label">searchSuggest</string>
+    <string name="search_hint">suggestHint</string>
 
 </resources>

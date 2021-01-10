@@ -428,17 +428,14 @@ public class ChatBotActivity extends AppCompatActivity {
                 showMicText(text);
             }
         }
-
         @Override
         public void onError(Exception e) {
             showError(e);
             enableMicButton();
         }
-
         @Override
         public void onDisconnected() {
             enableMicButton();
         }
-
     }
 }

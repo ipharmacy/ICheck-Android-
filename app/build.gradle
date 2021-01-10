@@ -67,6 +67,7 @@ dependencies {
     // AR
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
     compile 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
 }
 apply plugin: 'com.google.ar.sceneform.plugin'
@@ -74,3 +75,4 @@ sceneform.asset('sampledata/tree.fbx',
                 'default',                    // 'Material Path' specified during import.
                 'sampledata/tree.sfa',
                 'src/main/assets/tree')
+

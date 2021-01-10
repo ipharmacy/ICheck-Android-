@@ -2,17 +2,17 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
     android:layout_margin="4dp"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="8dp"
+    app:cardCornerRadius="30dp"
+
 
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
        >
 
         <ImageView

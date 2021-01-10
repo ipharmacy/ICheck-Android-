@@ -1,5 +1,6 @@
 package test.test.icheck.RetroFit;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import test.test.icheck.entity.Customer;
 import test.test.icheck.entity.Favorite;
+import test.test.icheck.entity.MessageChat;
 import test.test.icheck.entity.Product;
 import test.test.icheck.entity.ProductDetails;
 
@@ -56,5 +58,12 @@ public interface IMyService {
     Call<Customer> verifyAccount(@Body HashMap<String,String> map);
     @POST("products/removeReview")
     Call<HashMap<String,String>> removeReview(@Body HashMap<String,String> map);
+    @POST("chat/addMessage")
+    Call<HashMap<String,String>> addMessage(@Body HashMap<String,String> map);
+    @POST("chat/getMessages")
+    Call<ArrayList<MessageChat>> getMessages(@Body HashMap<String,String> map);
+    @GET("user/friends")
+    Call<ArrayList<Customer>> getAllCustomers();
+
 
 }
