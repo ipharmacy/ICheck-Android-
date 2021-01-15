@@ -24,6 +24,7 @@ import test.test.icheck.entity.ProductDetails;
 public interface IMyService {
     @POST("user/register")
     Call<Customer> register(@Body HashMap<String,String> map);
+
     @POST("user/login")
     Call<Customer> executeLogin(@Body HashMap<String,String> map);
     @Multipart
