@@ -144,6 +144,9 @@ public class registerimage extends AppCompatActivity implements AdapterView.OnIt
                 @Override
                 public void onFailure(Call call, Throwable t) {
                     Toast.makeText(registerimage.this, "Image Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(registerimage.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+                    update.setVisibility(View.VISIBLE);
+                    upload.setVisibility(View.INVISIBLE);
                 }
             });
         }

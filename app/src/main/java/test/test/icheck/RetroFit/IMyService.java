@@ -24,7 +24,6 @@ import test.test.icheck.entity.ProductDetails;
 public interface IMyService {
     @POST("user/register")
     Call<Customer> register(@Body HashMap<String,String> map);
-
     @POST("user/login")
     Call<Customer> executeLogin(@Body HashMap<String,String> map);
     @Multipart
@@ -32,13 +31,10 @@ public interface IMyService {
     Call<ResponseBody> postImage(@Part MultipartBody.Part File, @Part("avatar") RequestBody name);
     @POST("user/updateAvatar")
     Call<ResponseBody> updateAvatar(@Body HashMap<String,String> map);
-
     @GET("products/")
     Call<List<Product>> getProducts();
-
     @POST("products/id")
     Call<Product> findById(@Body HashMap<String,String> map);
-
     @POST("products/addReview")
     Call<HashMap<String,String>> addReview(@Body HashMap<String,String> map);
 
